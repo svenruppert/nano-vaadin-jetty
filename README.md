@@ -8,6 +8,9 @@
 # Nano Vaadin - Ramp up in a second.
 A nano project to start a Vaadin project. Perfect for Micro-UIs packed as fat jar in a docker image.
 
+## Supported JDK
+This example is running from JDK8 up to JDK13
+
 ## target of this project
 The target of this project is a minimal rampup time for a first hello world.
 Why we need one more HelloWorld? Well, the answer is quite easy. 
