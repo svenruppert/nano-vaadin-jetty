@@ -80,9 +80,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <compiler.target>8</compiler.target>
+    <compiler.target>11</compiler.target>
     <!--technical-->
-    <!--    <maven.compiler.release>${compiler.target}</maven.compiler.release>-->
+    <maven.compiler.release>${compiler.target}</maven.compiler.release>
     <maven.compiler.target>${compiler.target}</maven.compiler.target>
     <maven.compiler.source>${compiler.target}</maven.compiler.source>
 
@@ -244,12 +244,12 @@
   </dependencies>
 
   <build>
-<!--    <resources>-->
-<!--      <resource>-->
-<!--        <directory>src/main</directory>-->
-<!--        <filtering>true</filtering>-->
-<!--      </resource>-->
-<!--    </resources>-->
+    <!--    <resources>-->
+    <!--      <resource>-->
+    <!--        <directory>src/main</directory>-->
+    <!--        <filtering>true</filtering>-->
+    <!--      </resource>-->
+    <!--    </resources>-->
     <plugins>
       <plugin>
         <groupId>com.vaadin</groupId>
