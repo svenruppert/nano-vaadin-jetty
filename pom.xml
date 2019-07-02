@@ -94,6 +94,7 @@
     <!--Vaadin-->
     <vaadin.productionMode>true</vaadin.productionMode>
     <vaadin.version>14.0.0.rc3</vaadin.version>
+    <activateNodeJS_NPM>true</activateNodeJS_NPM>
     <frontend-maven-plugin.nodeVersion>v10.16.0</frontend-maven-plugin.nodeVersion>
     <frontend-maven-plugin.npmVersion>6.9.0</frontend-maven-plugin.npmVersion>
 
