@@ -107,6 +107,10 @@
     <!--logging-->
     <slf4j.version>1.7.25</slf4j.version>
     <log4j-api.version>2.8.1</log4j-api.version>
+
+<!--    APM-->
+    <!--    APM-->
+    <opentracing-api.version>0.31.0</opentracing-api.version>
   </properties>
 
   <repositories>
