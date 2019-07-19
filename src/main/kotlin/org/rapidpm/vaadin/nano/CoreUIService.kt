@@ -18,6 +18,8 @@
  */
 package org.rapidpm.vaadin.nano
 
+import org.apache.commons.cli.DefaultParser
+import org.apache.commons.cli.Options
 import org.eclipse.jetty.annotations.AnnotationConfiguration
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.util.resource.Resource
@@ -38,6 +40,8 @@ class CoreUIService : HasLogger {
   fun startup() {
 
     try {
+
+
       val context = WebAppContext()
       context.isLogUrlOnStart = true
       context.isConfigurationDiscovered = true
@@ -53,7 +57,7 @@ class CoreUIService : HasLogger {
       context.allowNullPathInfo = true
       context.setAttribute(JAR_PATTERN, ".*")
 
-      val server = Server(valueOf(getProperty("port",getProperty(CORE_UI_SERVER_PORT, CORE_UI_SERVER_PORT_DEFAULT))))
+      val server = Server(valueOf(getProperty(CORE_UI_SERVER_PORT, CORE_UI_SERVER_PORT_DEFAULT)))
       server.handler = context
 
       server.start()
@@ -75,5 +79,8 @@ class CoreUIService : HasLogger {
 
     val CORE_UI_SERVER_HOST = "core-ui-server-host"
     val CORE_UI_SERVER_PORT = "core-ui-server-port"
+
+    val CLI_HOST = "host"
+    val CLI_PORT = "port"
   }
 }
