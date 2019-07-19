@@ -226,11 +226,11 @@
     </dependency>
 
 
-    <dependency>
-      <groupId>org.rapidpm.vaadin</groupId>
-      <artifactId>id-generator-for-flow-impl</artifactId>
-      <version>00.08.00-RPM</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.rapidpm.vaadin</groupId>-->
+<!--      <artifactId>id-generator-for-flow-impl</artifactId>-->
+<!--      <version>00.08.00-RPM</version>-->
+<!--    </dependency>-->
     <!--Logging-->
     <dependency>
       <groupId>org.slf4j</groupId>
