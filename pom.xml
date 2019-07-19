@@ -230,11 +230,20 @@
       <artifactId>commons-cli</artifactId>
     </dependency>
 
-<!--    <dependency>-->
-<!--      <groupId>org.rapidpm.vaadin</groupId>-->
-<!--      <artifactId>id-generator-for-flow-impl</artifactId>-->
-<!--      <version>00.08.00-RPM</version>-->
-<!--    </dependency>-->
+    <!--    APM Stagemonitor Start -->
+    <dependency>
+      <groupId>org.stagemonitor</groupId>
+      <artifactId>stagemonitor-web-servlet</artifactId>
+      <version>0.88.9</version>
+    </dependency>
+
+    <dependency>
+      <groupId>net.bytebuddy</groupId>
+      <artifactId>byte-buddy</artifactId>
+      <version>1.8.11</version>
+    </dependency>
+    <!--    APM Stagemonitor End -->
+
     <!--Logging-->
     <dependency>
       <groupId>org.slf4j</groupId>
