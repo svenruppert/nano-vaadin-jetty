@@ -53,7 +53,7 @@ class CoreUIService : HasLogger {
       context.allowNullPathInfo = true
       context.setAttribute(JAR_PATTERN, ".*")
 
-      val server = Server(valueOf(getProperty(CORE_UI_SERVER_PORT, CORE_UI_SERVER_PORT_DEFAULT)))
+      val server = Server(valueOf(getProperty("port",getProperty(CORE_UI_SERVER_PORT, CORE_UI_SERVER_PORT_DEFAULT))))
       server.handler = context
 
       server.start()
