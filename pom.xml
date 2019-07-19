@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-dependencies</artifactId>
-    <version>04.01.01-RPM</version>
+    <version>04.01.03-RPM</version>
   </parent>
 
 
@@ -80,15 +80,19 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <compiler.target>11</compiler.target>
+    <jdk.version>8</jdk.version>
     <!--technical-->
-    <maven.compiler.release>${compiler.target}</maven.compiler.release>
-    <maven.compiler.target>${compiler.target}</maven.compiler.target>
-    <maven.compiler.source>${compiler.target}</maven.compiler.source>
+    <!--<maven.compiler.release>8</maven.compiler.release> &lt;!&ndash;release makes source and target&ndash;&gt;-->
+    <maven.compiler.source>${jdk.version}</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
+    <maven.compiler.target>${jdk.version}</maven.compiler.target> <!--use release when importing-->
+
+    <!--    <maven.compiler.testRelease>11</maven.compiler.testRelease>-->
+    <maven.compiler.testSource>${jdk.version}</maven.compiler.testSource>
+    <maven.compiler.testTarget>${jdk.version}</maven.compiler.testTarget>
 
     <!--Kotlin-->
-    <kotlin.compiler.jvmTarget>${compiler.target}</kotlin.compiler.jvmTarget>
-    <!--    <kotlin.version>1.3.40</kotlin.version>-->
+    <kotlin.compiler.jvmTarget>${jdk.version}</kotlin.compiler.jvmTarget>
+    <kotlin.version>1.3.41</kotlin.version>
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
     <!--Vaadin-->
@@ -98,7 +102,7 @@
     <frontend-maven-plugin.nodeVersion>v10.16.0</frontend-maven-plugin.nodeVersion>
     <frontend-maven-plugin.npmVersion>6.9.0</frontend-maven-plugin.npmVersion>
 
-    <jetty.version>9.4.18.v20190429</jetty.version>
+    <jetty.version>9.4.19.v20190610</jetty.version>
 
     <!--logging-->
     <slf4j.version>1.7.25</slf4j.version>
@@ -221,6 +225,12 @@
       </exclusions>
     </dependency>
 
+
+    <dependency>
+      <groupId>org.rapidpm.vaadin</groupId>
+      <artifactId>id-generator-for-flow-impl</artifactId>
+      <version>00.08.00-RPM</version>
+    </dependency>
     <!--Logging-->
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -230,17 +240,11 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.jetbrains.kotlin</groupId>
-      <artifactId>kotlin-stdlib-jdk8</artifactId>
-      <version>${kotlin.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jetbrains.kotlin</groupId>
-      <artifactId>kotlin-test</artifactId>
-      <version>${kotlin.version}</version>
-      <scope>test</scope>
-    </dependency>
+    <!--    <dependency>-->
+    <!--      <groupId>org.jetbrains.kotlin</groupId>-->
+    <!--      <artifactId>kotlin-stdlib-jdk8</artifactId>-->
+    <!--      <version>${kotlin.version}</version>-->
+    <!--    </dependency>-->
   </dependencies>
 
   <build>

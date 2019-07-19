@@ -24,10 +24,9 @@ import org.eclipse.jetty.util.resource.Resource
 import org.eclipse.jetty.webapp.*
 import org.rapidpm.dependencies.core.logger.HasLogger
 import org.rapidpm.frp.model.Result
-
+import org.rapidpm.frp.model.Result.failure
 import java.lang.Integer.valueOf
 import java.lang.System.getProperty
-import org.rapidpm.frp.model.Result.failure
 
 /**
  *
@@ -42,7 +41,11 @@ class CoreUIService : HasLogger {
       val context = WebAppContext()
       context.isLogUrlOnStart = true
       context.isConfigurationDiscovered = true
-      context.configurations = arrayOf<Configuration>(AnnotationConfiguration(), WebInfConfiguration(), WebXmlConfiguration(), MetaInfConfiguration())
+      context.configurations = arrayOf<Configuration>(
+          AnnotationConfiguration(),
+          WebInfConfiguration(),
+          WebXmlConfiguration(),
+          MetaInfConfiguration())
 
       context.contextPath = "/"
       val classPathResource = Resource.newClassPathResource("/META-INF/resources", true, true)
