@@ -83,8 +83,8 @@
     <jdk.version>1.8</jdk.version>
 
     <!--Vaadin-->
-    <vaadin-productionMode>false</vaadin-productionMode>
-    <vaadin-install-nodejs>true</vaadin-install-nodejs>
+<!--    <vaadin-productionMode>false</vaadin-productionMode>-->
+<!--    <vaadin-install-nodejs>true</vaadin-install-nodejs>-->
 
 <!--    <vaadin.version></vaadin.version>-->
 <!--    <frontend-maven-plugin.nodeVersion>v10.16.0</frontend-maven-plugin.nodeVersion>-->
