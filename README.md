@@ -12,6 +12,18 @@ A nano project to start a Vaadin project. Perfect for Micro-UIs packed as fat ja
 On Heroku you find a deployed version together with the OpenSource APM solution called stagemonitor.
 [https://nano-vaadin-jetty-kotlin.herokuapp.com/](https://nano-vaadin-jetty-kotlin.herokuapp.com/)
 
+To support the Heroku pipeline we need a few preparations.
+1) the app must be able to get a configured port for the http port during the start up
+1) add the shade plugin to create a fat jar
+1) create the file **Procfile** and add the line 
+    ``web: java -jar target/vaadin-app.jar -port $PORT```
+    * **web** - to activate the web profile
+    * **-jar** - define what fat jar must be started
+    * **-port** make the dynamic associated port available for the app
+1) add a file **settings.xml** to configure the maven build process
+    
+
+
 ## Supported JDK
 This example is running from JDK8 up to JDK13
 
