@@ -16,7 +16,6 @@
 <!--  </profiles>-->
 
   <activeProfiles>
-    <activeProfile>_release</activeProfile>
     <activeProfile>_java-and-kotlin</activeProfile>
     <activeProfile>vaadin-install-nodejs</activeProfile>
   </activeProfiles>
