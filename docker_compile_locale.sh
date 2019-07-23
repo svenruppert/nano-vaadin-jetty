@@ -6,7 +6,7 @@ docker run \
       -v "$(pwd)":/usr/src/mymaven \
       -w /usr/src/mymaven \
       working/vaadin-v14-prepared:latest \
-      mvn clean install -Dmaven.test.skip=true -DactivateNodeJS_NPM=true
+      mvn clean install -Dmaven.test.skip=true -Dvaadin-install-nodejs
 
 #      svenruppert/maven-3.6.1-openjdk:1.11.0-2
 #      svenruppert/nodejs-maven-3.6.1-adopt:1.8.212-04 \

@@ -8,6 +8,7 @@ if docker_tag_exists working/vaadin-v14-prepared 20190628-001; then
     echo skip building, image already existing - working/vaadin-v14-prepared 20190628-001
 else
     echo start building the images
+    docker image rm -f working/vaadin-v14-prepared
     docker build -t working/vaadin-v14-prepared .
 #    docker tag working/vaadin-v14-prepared:latest working/vaadin-v14-prepared:20190628-001
 #    docker push working/vaadin-v14-prepared:20190628-001

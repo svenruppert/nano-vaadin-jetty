@@ -8,6 +8,10 @@
 # Nano Vaadin - Ramp up in a second.
 A nano project to start a Vaadin project. Perfect for Micro-UIs packed as fat jar in a docker image.
 
+## Demo on Heroku
+On Heroku you find a deployed version together with the OpenSource APM solution called stagemonitor.
+[https://nano-vaadin-jetty-kotlin.herokuapp.com/](https://nano-vaadin-jetty-kotlin.herokuapp.com/)
+
 ## Supported JDK
 This example is running from JDK8 up to JDK13
 
