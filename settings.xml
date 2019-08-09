@@ -4,7 +4,6 @@
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
 <!--  This is for Heroku deployments-->
-
   <activeProfiles>
     <activeProfile>_java-and-kotlin</activeProfile>
     <activeProfile>vaadin-install-nodejs</activeProfile>
