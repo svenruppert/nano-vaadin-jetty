@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-vaadin-dependencies-v14</artifactId>
-    <version>04.01.04-RPM</version>
+    <version>04.01.08-RPM</version>
   </parent>
 
 
@@ -155,6 +155,17 @@
       <artifactId>stagemonitor-web-servlet</artifactId>
       <version>${stagemonitor.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.stagemonitor</groupId>
+      <artifactId>stagemonitor-tracing</artifactId>
+      <version>${stagemonitor.version}</version>
+    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.stagemonitor</groupId>-->
+<!--      <artifactId>stagemonitor-tracing-zipkin</artifactId>-->
+<!--      <version>${stagemonitor.version}</version>-->
+<!--    </dependency>-->
+
 
     <dependency>
       <groupId>net.bytebuddy</groupId>
