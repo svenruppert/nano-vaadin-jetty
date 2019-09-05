@@ -18,8 +18,6 @@
  */
 package org.rapidpm.vaadin.nano
 
-import org.apache.commons.cli.DefaultParser
-import org.apache.commons.cli.Options
 import org.eclipse.jetty.annotations.AnnotationConfiguration
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.util.component.AbstractLifeCycle
@@ -36,15 +34,13 @@ import java.lang.System.getProperty
 /**
  *
  */
-class CoreUIService : HasLogger {
+class CoreUIServiceKotlin : HasLogger {
 
   var jetty = failure<Server>("not initialised so far")
 
   fun startup() {
 
     try {
-
-
       val context = WebAppContext()
       context.isLogUrlOnStart = true
       context.isConfigurationDiscovered = true
@@ -62,7 +58,6 @@ class CoreUIService : HasLogger {
 
       val server = Server(valueOf(getProperty(CORE_UI_SERVER_PORT, CORE_UI_SERVER_PORT_DEFAULT)))
       server.handler = context
-
 
       //            Start APM
       val servletHandler = context.servletHandler
