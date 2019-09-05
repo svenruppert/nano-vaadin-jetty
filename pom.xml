@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-vaadin-dependencies-v14</artifactId>
-    <version>04.01.08-RPM</version>
+    <version>04.01.10-RPM</version>
   </parent>
 
 
@@ -90,7 +90,7 @@
 <!--    <frontend-maven-plugin.nodeVersion>v10.16.0</frontend-maven-plugin.nodeVersion>-->
 <!--    <frontend-maven-plugin.npmVersion>6.9.0</frontend-maven-plugin.npmVersion>-->
 
-    <jetty.version>9.4.19.v20190610</jetty.version>
+    <jetty.version>9.4.20.v20190813</jetty.version>
 
     <!--logging-->
     <slf4j.version>1.7.25</slf4j.version>
@@ -205,7 +205,7 @@
                     implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                   <manifestEntries>
-                    <Main-Class>demo.NanoVaadinOnKotlinKt</Main-Class>
+                    <Main-Class>demo.StartupKotlin</Main-Class>
                   </manifestEntries>
                 </transformer>
               </transformers>
