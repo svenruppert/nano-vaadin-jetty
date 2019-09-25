@@ -27,7 +27,7 @@ import org.eclipse.jetty.webapp.*
 import org.rapidpm.dependencies.core.logger.HasLogger
 import org.rapidpm.frp.model.Result
 import org.rapidpm.frp.model.Result.failure
-import org.stagemonitor.web.servlet.initializer.ServletContainerInitializerUtil
+//import org.stagemonitor.web.servlet.initializer.ServletContainerInitializerUtil
 import java.lang.Integer.valueOf
 import java.lang.System.getProperty
 
@@ -62,11 +62,11 @@ class CoreUIServiceKotlin : HasLogger {
       //            Start APM
       val servletHandler = context.servletHandler
 
-      servletHandler.addLifeCycleListener(object : AbstractLifeCycle.AbstractLifeCycleListener() {
-        override fun lifeCycleStarting(event: LifeCycle?) {
-          ServletContainerInitializerUtil.registerStagemonitorServletContainerInitializers(context.servletContext)
-        }
-      })
+//      servletHandler.addLifeCycleListener(object : AbstractLifeCycle.AbstractLifeCycleListener() {
+//        override fun lifeCycleStarting(event: LifeCycle?) {
+//          ServletContainerInitializerUtil.registerStagemonitorServletContainerInitializers(context.servletContext)
+//        }
+//      })
 
 
       server.start()

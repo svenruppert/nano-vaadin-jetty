@@ -5,7 +5,6 @@ import org.apache.commons.cli.Options
 import org.apache.commons.cli.ParseException
 import org.rapidpm.vaadin.nano.CoreUIServiceJava
 import org.rapidpm.vaadin.nano.CoreUIServiceKotlin
-import org.stagemonitor.core.Stagemonitor
 import java.lang.System.setProperty
 
 object StartupKotlin {
@@ -32,7 +31,7 @@ object StartupKotlin {
       setProperty(CoreUIServiceKotlin.CORE_UI_SERVER_PORT, cmd.getOptionValue(CLI_PORT))
     }
 
-    Stagemonitor.init()
+//    Stagemonitor.init()
     CoreUIServiceJava().startup()
   }
 }
