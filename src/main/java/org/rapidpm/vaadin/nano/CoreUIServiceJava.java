@@ -43,13 +43,14 @@ public class CoreUIServiceJava
   public Result<Server> jetty = failure("not initialised so far");
 
   public void startup() {
-
     try {
       WebAppContext context = new WebAppContext();
       context.setLogUrlOnStart(true);
       context.setConfigurationDiscovered(true);
       context.setConfigurations(new Configuration[]{
-          new AnnotationConfiguration(), new WebInfConfiguration(), new WebXmlConfiguration(),
+          new AnnotationConfiguration(),
+          new WebInfConfiguration(),
+          new WebXmlConfiguration(),
           new MetaInfConfiguration()
       });
 

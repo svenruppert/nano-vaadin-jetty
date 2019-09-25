@@ -20,7 +20,6 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.rapidpm.vaadin.nano.CoreUIServiceJava;
-import org.stagemonitor.core.Stagemonitor;
 
 import static java.lang.System.setProperty;
 
@@ -37,7 +36,6 @@ public class StartupJava {
 
   public static void main(String[] args) throws ParseException {
     //init i18n
-    //init stagemonitor
     final Options options = new Options();
     options.addOption(CLI_HOST, true, "host to use");
     options.addOption(CLI_PORT, true, "port to use");
@@ -51,8 +49,6 @@ public class StartupJava {
     if (cmd.hasOption(CLI_PORT)) {
       setProperty(CoreUIServiceJava.CORE_UI_SERVER_PORT, cmd.getOptionValue(CLI_PORT));
     }
-
-    Stagemonitor.init();
     new CoreUIServiceJava().startup();
   }
 }
