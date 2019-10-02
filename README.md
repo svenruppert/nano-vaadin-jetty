@@ -1,11 +1,12 @@
 
 <center>
 <a href="https://vaadin.com">
- <img src="https://vaadin.com/images/hero-reindeer.svg" width="200" height="200" /></a>
+ <img src="https://vaadin.com/images/hero-reindeer.svg" width="200" height="200"  alt="Image"/></a>
 </center>
 
 
 # Nano Vaadin - Ramp up in a second.
+
 A nano project to start a Vaadin project. 
 Perfect for Micro-UIs packed as fat jar in a docker image.
 This demo is bundled together with the Open Source APM tool called **stagemonitor**.
