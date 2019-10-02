@@ -4,7 +4,6 @@
  <img src="https://vaadin.com/images/hero-reindeer.svg" width="200" height="200" /></a>
 </center>
 
-
 # Nano Vaadin - Ramp up in a second.
 A nano project to start a Vaadin project. 
 Perfect for Micro-UIs packed as fat jar in a docker image.
