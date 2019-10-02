@@ -52,10 +52,10 @@ public class CoreUIServiceJava
   public static final String CLI_PORT = "port";
 
   public static void main(String[] args) throws ParseException {
-    new CoreUIServiceJava().executeCLI(args).startup();
+    new CoreUIServiceJava().executeCLIXX(args).startup();
   }
 
-  public CoreUIServiceJava executeCLI(String[] args) throws ParseException {
+  public CoreUIServiceJava executeCLIXX(String[] args) throws ParseException {
     final Options options = new Options();
     options.addOption(CLI_HOST, true, "host to use");
     options.addOption(CLI_PORT, true, "port to use");
