@@ -15,6 +15,10 @@
  */
 package org.rapidpm.vaadin.nano;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.util.resource.Resource;
@@ -23,6 +27,7 @@ import org.rapidpm.dependencies.core.logger.HasLogger;
 import org.rapidpm.frp.model.Result;
 
 import static java.lang.System.getProperty;
+import static java.lang.System.setProperty;
 import static org.rapidpm.frp.model.Result.failure;
 
 /**
@@ -41,6 +46,31 @@ public class CoreUIServiceJava
   public static final String CORE_UI_SERVER_PORT = "core-ui-server-port";
 
   public Result<Server> jetty = failure("not initialised so far");
+
+
+  public static final String CLI_HOST = "host";
+  public static final String CLI_PORT = "port";
+
+  public static void main(String[] args) throws ParseException {
+    new CoreUIServiceJava().executeCLI(args).startup();
+  }
+
+  public CoreUIServiceJava executeCLI(String[] args) throws ParseException {
+    final Options options = new Options();
+    options.addOption(CLI_HOST, true, "host to use");
+    options.addOption(CLI_PORT, true, "port to use");
+
+    DefaultParser parser = new DefaultParser();
+    CommandLine   cmd    = parser.parse(options, args);
+
+    if (cmd.hasOption(CLI_HOST)) {
+      setProperty(CoreUIServiceJava.CORE_UI_SERVER_HOST, cmd.getOptionValue(CLI_HOST));
+    }
+    if (cmd.hasOption(CLI_PORT)) {
+      setProperty(CoreUIServiceJava.CORE_UI_SERVER_PORT, cmd.getOptionValue(CLI_PORT));
+    }
+    return this;
+  }
 
   public void startup() {
     try {

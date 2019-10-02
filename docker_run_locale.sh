@@ -8,4 +8,4 @@ docker run \
        -v "$(pwd)":/usr/src/mymaven \
        -w /usr/src/mymaven \
        svenruppert/adopt:1.8.212-04:latest \
-       java -jar target/vaadin-app.jar
+       java -jar 03_demo/target/vaadin-app.jar
