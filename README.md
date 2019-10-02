@@ -1,7 +1,7 @@
 
 <center>
 <a href="https://vaadin.com">
- <img src="https://vaadin.com/images/hero-reindeer.svg" width="200" height="200" /></a>
+ <img src="https://vaadin.com/images/hero-reindeer.svg" width="200" height="200"  alt="Image"/></a>
 </center>
 
 
