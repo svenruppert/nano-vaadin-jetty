@@ -18,18 +18,20 @@
  */
 package org.rapidpm.vaadin.nano
 
+//import org.stagemonitor.web.servlet.initializer.ServletContainerInitializerUtil
+import org.apache.commons.cli.DefaultParser
+import org.apache.commons.cli.Options
+import org.apache.commons.cli.ParseException
 import org.eclipse.jetty.annotations.AnnotationConfiguration
 import org.eclipse.jetty.server.Server
-import org.eclipse.jetty.util.component.AbstractLifeCycle
-import org.eclipse.jetty.util.component.LifeCycle
 import org.eclipse.jetty.util.resource.Resource
 import org.eclipse.jetty.webapp.*
 import org.rapidpm.dependencies.core.logger.HasLogger
 import org.rapidpm.frp.model.Result
 import org.rapidpm.frp.model.Result.failure
-//import org.stagemonitor.web.servlet.initializer.ServletContainerInitializerUtil
 import java.lang.Integer.valueOf
 import java.lang.System.getProperty
+import java.lang.System.setProperty
 
 /**
  *
@@ -37,6 +39,25 @@ import java.lang.System.getProperty
 class CoreUIServiceKotlin : HasLogger {
 
   var jetty = failure<Server>("not initialised so far")
+
+
+  @Throws(ParseException::class)
+  fun executeCLI(args: Array<String>): CoreUIServiceKotlin {
+    val options = Options()
+    options.addOption(CLI_HOST, true, "host to use")
+    options.addOption(CLI_PORT, true, "port to use")
+
+    val parser = DefaultParser()
+    val cmd = parser.parse(options, args)
+
+    if (cmd.hasOption(CLI_HOST)) {
+      setProperty(CoreUIServiceJava.CORE_UI_SERVER_HOST, cmd.getOptionValue(CLI_HOST))
+    }
+    if (cmd.hasOption(CLI_PORT)) {
+      setProperty(CoreUIServiceJava.CORE_UI_SERVER_PORT, cmd.getOptionValue(CLI_PORT))
+    }
+    return this
+  }
 
   fun startup() {
 
@@ -59,16 +80,6 @@ class CoreUIServiceKotlin : HasLogger {
       val server = Server(valueOf(getProperty(CORE_UI_SERVER_PORT, CORE_UI_SERVER_PORT_DEFAULT)))
       server.handler = context
 
-      //            Start APM
-      val servletHandler = context.servletHandler
-
-//      servletHandler.addLifeCycleListener(object : AbstractLifeCycle.AbstractLifeCycleListener() {
-//        override fun lifeCycleStarting(event: LifeCycle?) {
-//          ServletContainerInitializerUtil.registerStagemonitorServletContainerInitializers(context.servletContext)
-//        }
-//      })
-
-
       server.start()
       server.join()
       jetty = Result.success(server)
@@ -81,7 +92,6 @@ class CoreUIServiceKotlin : HasLogger {
   companion object {
 
     val JAR_PATTERN = "org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern"
-
 
     val CORE_UI_SERVER_HOST_DEFAULT = "0.0.0.0"
     val CORE_UI_SERVER_PORT_DEFAULT = "8899"
