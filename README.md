@@ -4,7 +4,6 @@
  <img src="https://vaadin.com/images/hero-reindeer.svg" width="200" height="200"  alt="Image"/></a>
 </center>
 
-
 # Nano Vaadin - Ramp up in a second.
 
 A nano project to start a Vaadin project. 
@@ -35,12 +34,18 @@ docker image rm nanovaadin/jetty-kotlin
 If you want to build this docker image on your machine you can use the provided **Dockerfile**
 
 ```bash
-docker build -t nanovaadin/jetty-kotlin .
+docker build -t nanovaadin/jetty .
 ```
 
 ## Demo running on Heroku
 On Heroku you find a deployed version.
-[https://nano-vaadin-jetty-kotlin.herokuapp.com/](https://nano-vaadin-jetty-kotlin.herokuapp.com/)
+
+The branch **develop** will be deployed on heroku and you can have a sneak preview on what is coming:
+[https://nano-vaadin-jetty-develop.herokuapp.com/](https://nano-vaadin-jetty-develop.herokuapp.com/)
+
+The Branch master is deployed on heroku as well and you can access it under
+[https://nano-vaadin-jetty.herokuapp.com/](https://nano-vaadin-jetty.herokuapp.com/)
+
 
 ## How to build this locally?
 If you want to build this demo check out the repository and invoke

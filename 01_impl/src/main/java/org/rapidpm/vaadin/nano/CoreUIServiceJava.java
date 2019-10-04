@@ -1,12 +1,12 @@
 /**
  * Copyright © 2017 Sven Ruppert (sven.ruppert@gmail.com)
- * <p>
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -52,10 +52,10 @@ public class CoreUIServiceJava
   public static final String CLI_PORT = "port";
 
   public static void main(String[] args) throws ParseException {
-    new CoreUIServiceJava().executeCLIOLDY(args).startup();
+    new CoreUIServiceJava().executeCLI(args).startup();
   }
 
-  public CoreUIServiceJava executeCLIOLDY(String[] args) throws ParseException {
+  public CoreUIServiceJava executeCLI(String[] args) throws ParseException {
     final Options options = new Options();
     options.addOption(CLI_HOST, true, "host to use");
     options.addOption(CLI_PORT, true, "port to use");
