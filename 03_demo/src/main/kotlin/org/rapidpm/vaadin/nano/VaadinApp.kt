@@ -8,7 +8,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.router.Route
 import org.rapidpm.dependencies.core.logger.HasLogger
 
-@Route("")
+@Route("old")
 class VaadinApp : Composite<Div>(), HasLogger {
 
   private val btnClickMe = Button("click me")
