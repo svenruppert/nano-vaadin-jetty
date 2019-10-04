@@ -20,18 +20,12 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <modules>
-    <module>01_impl</module>
-    <module>02_test</module>
-    <module>03_demo</module>
-  </modules>
 
   <parent>
     <groupId>org.rapidpm</groupId>
-    <artifactId>rapidpm-vaadin-dependencies-v14</artifactId>
-    <version>04.01.15-RPM</version>
+    <artifactId>rapidpm-dependencies</artifactId>
+    <version>04.02.00-RPM</version>
   </parent>
-
 
   <groupId>org.rapidpm.vaadin</groupId>
   <artifactId>nano-vaadin-jetty-parent</artifactId>
@@ -93,6 +87,12 @@
     <slf4j.version>1.7.25</slf4j.version>
     <log4j-api.version>2.8.1</log4j-api.version>
   </properties>
+
+  <modules>
+    <module>01_impl</module>
+    <module>02_test</module>
+    <module>03_demo</module>
+  </modules>
 
   <dependencyManagement>
     <dependencies>
