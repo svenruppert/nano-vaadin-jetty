@@ -15,6 +15,8 @@ import com.vaadin.flow.router.PageTitle
 import com.vaadin.flow.router.Route
 import com.vaadin.flow.router.RouteAlias
 import org.rapidpm.dependencies.core.logger.HasLogger
+import org.rapidpm.vaadin.nano.demo.MainView
+import org.rapidpm.vaadin.nano.demo.views.cards.ButtonClickCard
 import org.rapidpm.vaadin.nano.demo.views.cards.ServiceHealtCard
 
 @Route(value = "dashboard", layout = MainView::class)
@@ -40,6 +42,7 @@ class DashboardView : Composite<Div>(), HasLogger {
     content.add(gridLayout)
     gridLayout.withItems(
         ServiceHealtCard(),
+        ButtonClickCard(),
         ServiceHealtCard())
     gridLayout.withItemWithSize(ServiceHealtCard(), 2,1)
     gridLayout.withItems(

@@ -1,4 +1,4 @@
-package org.rapidpm.vaadin.nano.demo.views
+package org.rapidpm.vaadin.nano.demo.views.cards
 
 import com.vaadin.flow.component.Component
 import com.vaadin.flow.component.html.Div

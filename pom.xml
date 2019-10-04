@@ -29,7 +29,7 @@
 
   <groupId>org.rapidpm.vaadin</groupId>
   <artifactId>nano-vaadin-jetty-parent</artifactId>
-  <version>00.07.05-RPM-SNAPSHOT</version>
+  <version>01.00.00-RPM</version>
 
   <packaging>pom</packaging>
 
@@ -99,7 +99,7 @@
       <dependency>
         <groupId>org.rapidpm.vaadin</groupId>
         <artifactId>nano-vaadin-jetty</artifactId>
-        <version>00.07.05-RPM-SNAPSHOT</version>
+        <version>01.00.00-RPM</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

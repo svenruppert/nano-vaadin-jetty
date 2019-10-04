@@ -9,7 +9,6 @@ import com.vaadin.flow.component.html.Span
 import com.vaadin.flow.data.renderer.ComponentRenderer
 import org.rapidpm.dependencies.core.logger.HasLogger
 import org.rapidpm.vaadin.nano.demo.views.HealthGridItem
-import org.rapidpm.vaadin.nano.demo.views.WrapperCard
 import java.time.LocalDate
 import java.util.*
 

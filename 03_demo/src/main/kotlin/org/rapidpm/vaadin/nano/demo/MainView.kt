@@ -1,4 +1,4 @@
-package org.rapidpm.vaadin.nano.demo.views
+package org.rapidpm.vaadin.nano.demo
 
 import com.vaadin.flow.component.Component
 import com.vaadin.flow.component.HasComponents
@@ -11,6 +11,7 @@ import com.vaadin.flow.router.RouterLink
 import com.vaadin.flow.server.PWA
 import com.vaadin.flow.theme.Theme
 import com.vaadin.flow.theme.lumo.Lumo
+import org.rapidpm.vaadin.nano.demo.views.DashboardView
 import java.util.*
 
 /**
@@ -27,7 +28,6 @@ class MainView : AppLayout() {
     get() {
       val tabs = ArrayList<Tab>()
       tabs.add(createTab("Dashboard", DashboardView::class.java))
-      tabs.add(createTab("Dashboard 02", DashboardView::class.java))
       return tabs.toTypedArray()
     }
 

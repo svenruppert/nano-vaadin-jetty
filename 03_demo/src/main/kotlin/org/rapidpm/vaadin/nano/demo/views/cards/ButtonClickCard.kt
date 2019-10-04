@@ -1,4 +1,4 @@
-package org.rapidpm.vaadin.nano
+package org.rapidpm.vaadin.nano.demo.views.cards
 
 import com.vaadin.flow.component.Composite
 import com.vaadin.flow.component.button.Button
@@ -8,8 +8,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.router.Route
 import org.rapidpm.dependencies.core.logger.HasLogger
 
-@Route("old")
-class VaadinApp : Composite<Div>(), HasLogger {
+class ButtonClickCard : Composite<Div>(), HasLogger {
 
   private val btnClickMe = Button("click me")
   private val lbClickCount = Span("0")
