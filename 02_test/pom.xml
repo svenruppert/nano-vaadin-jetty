@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.rapidpm.vaadin</groupId>
     <artifactId>nano-vaadin-jetty-parent</artifactId>
-    <version>01.00.01-RPM-SNAPSHOT</version>
+    <version>01.00.01-RPM</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
