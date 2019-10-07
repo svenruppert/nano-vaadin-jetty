@@ -22,7 +22,7 @@
 <!--  <parent>-->
 <!--    <artifactId>nano-vaadin-jetty-parent</artifactId>-->
 <!--    <groupId>org.rapidpm.vaadin</groupId>-->
-<!--    <version>01.00.01-RPM</version>-->
+<!--    <version>01.00.02-RPM-SNAPSHOT</version>-->
 <!--  </parent>-->
 
   <parent>
@@ -36,7 +36,7 @@
 
   <groupId>org.rapidpm.vaadin</groupId>
   <artifactId>nano-vaadin-jetty-demo</artifactId>
-  <version>01.00.01-RPM</version>
+  <version>01.00.02-RPM-SNAPSHOT</version>
 
   <!-- Just to disable any accidental deployment to maven.central -->
   <distributionManagement>
@@ -54,7 +54,7 @@
     <dependency>
       <groupId>org.rapidpm.vaadin</groupId>
       <artifactId>nano-vaadin-jetty</artifactId>
-      <version>01.00.01-RPM</version>
+      <version>01.00.02-RPM-SNAPSHOT</version>
     </dependency>
     <!--For Core Vaadin Components-->
     <dependency>
