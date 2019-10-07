@@ -15,5 +15,5 @@
 # limitations under the License.
 #
 
-docker rm deploy
+docker rm deploy_nano_vaadin_jetty
 docker-compose up
