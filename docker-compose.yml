@@ -31,5 +31,6 @@ services:
     command: 'mvn license:format clean deploy
                     -P_release_prepare
                     -P_release
+                    -P_release_sign_artifacts
                     -Pvaadin-install-nodejs
                     -Dmaven.test.skip=true '

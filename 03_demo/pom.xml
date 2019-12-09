@@ -19,11 +19,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-<!--  <parent>-->
-<!--    <artifactId>nano-vaadin-jetty-parent</artifactId>-->
-<!--    <groupId>org.rapidpm.vaadin</groupId>-->
-<!--    <version>01.00.02-RPM-SNAPSHOT</version>-->
-<!--  </parent>-->
+  <!--  <parent>-->
+  <!--    <artifactId>nano-vaadin-jetty-parent</artifactId>-->
+  <!--    <groupId>org.rapidpm.vaadin</groupId>-->
+  <!--    <version>01.00.02-RPM-SNAPSHOT</version>-->
+  <!--  </parent>-->
 
   <parent>
     <groupId>org.rapidpm</groupId>
@@ -78,8 +78,12 @@
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin-tabs-flow</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-grid-flow</artifactId>
+    </dependency>
 
-<!--    external -->
+    <!--    external -->
     <dependency>
       <groupId>com.github.appreciated</groupId>
       <artifactId>vaadin-css-grid</artifactId>
@@ -109,7 +113,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.2.1</version>
         <executions>
           <execution>
             <phase>package</phase>
