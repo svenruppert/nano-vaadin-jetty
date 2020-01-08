@@ -24,7 +24,8 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-dependencies</artifactId>
-    <version>04.05.02-RPM</version>
+<!--    change in module 03_demo as well-->
+    <version>04.06.01-RPM-SNAPSHOT</version>
   </parent>
 
   <groupId>org.rapidpm.vaadin</groupId>
@@ -38,15 +39,16 @@
     <name>Vaadin</name>
     <url>http://www.vaadin.com</url>
   </organization>
-  <url>https://github.com/vaadin-developer/nano-vaadin-jetty</url>
+  <url>https://github.com/Nano-Vaadin-Demos/nano-vaadin-jetty</url>
+
 
   <scm>
-    <url>https://github.com/vaadin-developer/nano-vaadin-jetty</url>
+    <url>https://github.com/Nano-Vaadin-Demos/nano-vaadin-jetty</url>
     <connection>
-      scm:git:https://github.com/vaadin-developer/nano-vaadin-jetty.git
+      scm:git:https://github.com/Nano-Vaadin-Demos/nano-vaadin-jetty.git
     </connection>
     <developerConnection>
-      scm:git:https://github.com/vaadin-developer/nano-vaadin-jetty
+      scm:git:https://github.com/Nano-Vaadin-Demos/nano-vaadin-jetty
     </developerConnection>
     <tag>HEAD</tag>
   </scm>
@@ -63,7 +65,7 @@
   <issueManagement>
     <system>Github</system>
     <url>
-      https://github.com/vaadin-developer/nano-vaadin-jetty/issues
+      https://github.com/Nano-Vaadin-Demos/nano-vaadin-jetty/issues
     </url>
   </issueManagement>
   <licenses>
@@ -76,20 +78,48 @@
   </licenses>
 
   <properties>
-<!--    <deploy-repo-url></deploy-repo-url>-->
-<!--    <deploy-repo-snapshots-url></deploy-repo-snapshots-url>-->
+    <deploy-repo-url>http://repo.sven-ruppert.de/repository/maven-releases/</deploy-repo-url>
+    <deploy-repo-snapshots-url>http://repo.sven-ruppert.de/repository/maven-snapshots/</deploy-repo-snapshots-url>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <jdk.version>1.8</jdk.version>
     <!--    <jetty.version>10.0.0-alpha0</jetty.version>-->
-    <jetty.version>9.4.20.v20190813</jetty.version>
+    <jetty.version>9.4.25.v20191220</jetty.version>
 
     <!--logging-->
     <slf4j.version>1.7.25</slf4j.version>
     <log4j-api.version>2.8.1</log4j-api.version>
   </properties>
+
+
+  <distributionManagement>
+    <repository>
+      <id>deploy-repo-maven</id>
+      <name>deploy-repo-maven</name>
+      <url>${deploy-repo-url}</url>
+    </repository>
+    <snapshotRepository>
+      <id>deploy-repo-maven-snapshots</id>
+      <name>deploy-repo-maven-snapshots</name>
+      <url>${deploy-repo-snapshots-url}</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <repositories>
+    <!--    sven-ruppert-->
+    <repository>
+      <id>sven-ruppert</id>
+      <name>sven-ruppert</name>
+      <url>http://repo.sven-ruppert.de/repository/maven-public/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+  </repositories>
 
   <modules>
     <module>01_impl</module>
