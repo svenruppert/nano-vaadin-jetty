@@ -38,6 +38,21 @@
   <artifactId>nano-vaadin-jetty-demo</artifactId>
   <version>01.00.02-RPM-SNAPSHOT</version>
 
+  <repositories>
+    <!--    sven-ruppert-->
+    <repository>
+      <id>sven-ruppert</id>
+      <name>sven-ruppert</name>
+      <url>http://repo.sven-ruppert.de/repository/maven-public/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+  </repositories>
+
   <!-- Just to disable any accidental deployment to maven.central -->
   <distributionManagement>
     <repository>
