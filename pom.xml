@@ -109,20 +109,39 @@
       <url>${deploy-repo-snapshots-url}</url>
     </snapshotRepository>
   </distributionManagement>
+
   <repositories>
-    <!--    sven-ruppert-->
     <repository>
-      <id>sven-ruppert</id>
-      <name>sven-ruppert</name>
-      <url>http://repo.sven-ruppert.de/repository/maven-public/</url>
       <snapshots>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
       </snapshots>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
+      <id>central</id>
+      <name>libs-release</name>
+      <url>${deploy-repo-url}</url>
+    </repository>
+    <repository>
+      <snapshots />
+      <id>snapshots</id>
+      <name>libs-snapshot</name>
+      <url>${deploy-repo-snapshots-url}</url>
     </repository>
   </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>libs-release</name>
+      <url>${deploy-repo-url}</url>
+    </pluginRepository>
+    <pluginRepository>
+      <snapshots />
+      <id>snapshots</id>
+      <name>libs-snapshot</name>
+      <url>${deploy-repo-snapshots-url}</url>
+    </pluginRepository>
+  </pluginRepositories>
 
   <modules>
     <module>01_impl</module>
