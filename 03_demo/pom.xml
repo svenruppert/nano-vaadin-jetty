@@ -26,56 +26,15 @@
   <!--  </parent>-->
 
   <parent>
-    <groupId>org.rapidpm</groupId>
-    <artifactId>rapidpm-vaadin-dependencies-v14</artifactId>
-    <version>04.06.01-RPM-SNAPSHOT</version>
-    <relativePath></relativePath>
+    <groupId>org.rapidpm.vaadin</groupId>
+    <artifactId>nano-vaadin-jetty-parent</artifactId>
+    <version>01.00.02-RPM-SNAPSHOT</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.rapidpm.vaadin</groupId>
   <artifactId>nano-vaadin-jetty-demo</artifactId>
   <version>01.00.02-RPM-SNAPSHOT</version>
-
-  <repositories>
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>central</id>
-      <name>libs-release</name>
-      <url>${deploy-repo-url}</url>
-    </repository>
-    <repository>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-      <id>snapshots</id>
-      <name>libs-snapshot</name>
-      <url>${deploy-repo-snapshots-url}</url>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>central</id>
-      <name>libs-release</name>
-      <url>${deploy-repo-url}</url>
-    </pluginRepository>
-    <pluginRepository>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-      <id>snapshots</id>
-      <name>libs-snapshot</name>
-      <url>${deploy-repo-snapshots-url}</url>
-    </pluginRepository>
-  </pluginRepositories>
 
   <!-- Just to disable any accidental deployment to maven.central -->
   <distributionManagement>
@@ -128,20 +87,7 @@
       <artifactId>vaadin-css-grid</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>commons-cli</groupId>
-      <artifactId>commons-cli</artifactId>
-    </dependency>
 
-    <!--Logging-->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-    </dependency>
 
 
   </dependencies>
