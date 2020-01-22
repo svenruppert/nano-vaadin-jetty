@@ -24,7 +24,6 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-vaadin-dependencies-v14</artifactId>
-<!--    change in module 03_demo as well-->
     <version>04.06.01-RPM-SNAPSHOT</version>
   </parent>
 

@@ -19,12 +19,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <!--  <parent>-->
-  <!--    <artifactId>nano-vaadin-jetty-parent</artifactId>-->
-  <!--    <groupId>org.rapidpm.vaadin</groupId>-->
-  <!--    <version>01.00.02-RPM-SNAPSHOT</version>-->
-  <!--  </parent>-->
-
   <parent>
     <groupId>org.rapidpm.vaadin</groupId>
     <artifactId>nano-vaadin-jetty-parent</artifactId>
@@ -34,7 +28,6 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>nano-vaadin-jetty-demo</artifactId>
-  <version>01.00.02-RPM-SNAPSHOT</version>
 
   <!-- Just to disable any accidental deployment to maven.central -->
   <distributionManagement>
@@ -52,7 +45,6 @@
     <dependency>
       <groupId>org.rapidpm.vaadin</groupId>
       <artifactId>nano-vaadin-jetty</artifactId>
-      <version>01.00.02-RPM-SNAPSHOT</version>
     </dependency>
     <!--For Core Vaadin Components-->
     <dependency>
