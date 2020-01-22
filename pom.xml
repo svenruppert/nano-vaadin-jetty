@@ -79,20 +79,10 @@
   <properties>
     <deploy-repo-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</deploy-repo-url>
     <deploy-repo-snapshots-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</deploy-repo-snapshots-url>
-
-    <!--    <deploy-repo-url>http://repo.sven-ruppert.de/repository/maven-releases/</deploy-repo-url>-->
-    <!--    <deploy-repo-snapshots-url>http://repo.sven-ruppert.de/repository/maven-snapshots/</deploy-repo-snapshots-url>-->
-
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
     <jdk.version>1.8</jdk.version>
-    <!--    <jetty.version>10.0.0-alpha0</jetty.version>-->
     <jetty.version>9.4.25.v20191220</jetty.version>
-
-    <!--logging-->
-    <slf4j.version>1.7.25</slf4j.version>
-    <log4j-api.version>2.8.1</log4j-api.version>
   </properties>
 
 
@@ -117,12 +107,14 @@
       <id>central</id>
       <name>libs-release</name>
       <url>${deploy-repo-url}</url>
+<!--      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</url>-->
     </repository>
     <repository>
       <snapshots />
       <id>snapshots</id>
       <name>libs-snapshot</name>
       <url>${deploy-repo-snapshots-url}</url>
+<!--      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</url>-->
     </repository>
   </repositories>
   <pluginRepositories>
@@ -133,12 +125,14 @@
       <id>central</id>
       <name>libs-release</name>
       <url>${deploy-repo-url}</url>
+<!--      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</url>-->
     </pluginRepository>
     <pluginRepository>
       <snapshots />
       <id>snapshots</id>
       <name>libs-snapshot</name>
       <url>${deploy-repo-snapshots-url}</url>
+<!--      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</url>-->
     </pluginRepository>
   </pluginRepositories>
 
