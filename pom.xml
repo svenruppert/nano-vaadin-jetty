@@ -85,20 +85,6 @@
     <jetty.version>9.4.26.v20200117</jetty.version>
   </properties>
 
-
-  <distributionManagement>
-    <repository>
-      <id>deploy-repo-maven</id>
-      <name>deploy-repo-maven</name>
-      <url>${deploy-repo-url}</url>
-    </repository>
-    <snapshotRepository>
-      <id>deploy-repo-maven-snapshots</id>
-      <name>deploy-repo-maven-snapshots</name>
-      <url>${deploy-repo-snapshots-url}</url>
-    </snapshotRepository>
-  </distributionManagement>
-
   <repositories>
     <repository>
       <snapshots>
