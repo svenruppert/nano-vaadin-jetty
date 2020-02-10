@@ -22,14 +22,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.rapidpm</groupId>
+    <groupId>org.rapidpm.vaadin</groupId>
     <artifactId>rapidpm-vaadin-dependencies-v14</artifactId>
-    <version>04.06.01-RPM-SNAPSHOT</version>
+    <version>05.00.00-alpha-b3</version>
   </parent>
 
   <groupId>org.rapidpm.vaadin</groupId>
   <artifactId>nano-vaadin-jetty-parent</artifactId>
-  <version>01.00.02-RPM-SNAPSHOT</version>
+  <version>01.01.00-alpha</version>
 
   <packaging>pom</packaging>
 
@@ -106,15 +106,17 @@
       </snapshots>
       <id>central</id>
       <name>libs-release</name>
-      <url>${deploy-repo-url}</url>
-<!--      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</url>-->
+      <!--      <url>${deploy-repo-url}</url>-->
+      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</url>
     </repository>
     <repository>
-      <snapshots />
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
       <id>snapshots</id>
       <name>libs-snapshot</name>
-      <url>${deploy-repo-snapshots-url}</url>
-<!--      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</url>-->
+      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</url>
     </repository>
   </repositories>
   <pluginRepositories>
@@ -124,15 +126,17 @@
       </snapshots>
       <id>central</id>
       <name>libs-release</name>
-      <url>${deploy-repo-url}</url>
-<!--      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</url>-->
+      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</url>
+      <!--      <url>${deploy-repo-url}</url>-->
     </pluginRepository>
     <pluginRepository>
-      <snapshots />
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
       <id>snapshots</id>
       <name>libs-snapshot</name>
-      <url>${deploy-repo-snapshots-url}</url>
-<!--      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</url>-->
+      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</url>
     </pluginRepository>
   </pluginRepositories>
 
@@ -147,7 +151,7 @@
       <dependency>
         <groupId>org.rapidpm.vaadin</groupId>
         <artifactId>nano-vaadin-jetty</artifactId>
-        <version>01.00.02-RPM-SNAPSHOT</version>
+        <version>${project.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
