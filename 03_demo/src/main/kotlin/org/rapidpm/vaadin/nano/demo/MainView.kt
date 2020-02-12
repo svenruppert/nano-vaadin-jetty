@@ -34,7 +34,7 @@ import java.util.*
  */
 @JsModule("./styles/shared-styles.js")
 @PWA(name = "Nano-Vaadin for Flow", shortName = "Nano-Vaadin for Flow")
-@Theme(value = Lumo::class, variant = Lumo.LIGHT)
+@Theme(value = Lumo::class, variant = Lumo.DARK)
 class MainView : AppLayout() {
 
   private val menu: Tabs

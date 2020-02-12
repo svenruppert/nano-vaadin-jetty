@@ -1,4 +1,3 @@
-#!/bin/bash
 #
 # Copyright © 2017 Sven Ruppert (sven.ruppert@gmail.com)
 #
@@ -15,12 +14,18 @@
 # limitations under the License.
 #
 
+version: '3.5'
 
-docker run \
-       -it \
-       -p 8899:8899 \
-       --rm \
-       --name nanovaadin-jetty \
-       jfrog-repo.sven-ruppert.de:8081/docker/nanovaadin/jetty:latest
-#       nanovaadin/jetty:latest
+services:
+  demo:
+    image: jfrog-repo.sven-ruppert.de:8081/docker/nanovaadin/jetty:dev-latest
+    ports:
+      - "8899:8899"
+
+  watchtower:
+    image: jfrog-repo.sven-ruppert.de:8081/docker/containrrr/watchtower:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command:
+      --interval 30
 

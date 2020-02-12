@@ -15,12 +15,4 @@
 # limitations under the License.
 #
 
-
-docker run \
-       -it \
-       -p 8899:8899 \
-       --rm \
-       --name nanovaadin-jetty \
-       jfrog-repo.sven-ruppert.de:8081/docker/nanovaadin/jetty:latest
-#       nanovaadin/jetty:latest
-
+docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower
