@@ -14,9 +14,19 @@
 # limitations under the License.
 #
 
-FROM svenruppert/adopt:1.8.212-04
+#FROM svenruppert/adopt:1.8.212-04
+FROM jfrog-repo.sven-ruppert.de:8081/docker/ubuntu:latest
 MAINTAINER sven.ruppert@gmail.com
+
 ARG USER_HOME_DIR="/root"
+
+RUN curl -sL https://github.com/shyiko/jabba/raw/master/install.sh | \
+    JABBA_COMMAND="install adopt@1.8.0-232 -o /jdk" bash
+
+ENV JAVA_HOME /jdk
+ENV PATH $JAVA_HOME/bin:$PATH
+RUN java -version
+
 COPY 03_demo/target/vaadin-app.jar .
 EXPOSE 8899
 CMD ["java", "-jar", "vaadin-app.jar"]
