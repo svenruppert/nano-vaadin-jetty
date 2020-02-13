@@ -29,3 +29,13 @@ services:
     command:
       --interval 30
 
+  cAdvisor:
+    image: jfrog-repo.sven-ruppert.de:8081/docker/google-containers/cadvisor:latest
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    ports:
+      - "8080:8080"
