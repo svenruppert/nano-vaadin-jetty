@@ -20,7 +20,7 @@ MAINTAINER sven.ruppert@gmail.com
 
 ARG USER_HOME_DIR="/root"
 
-RUN apt update && sudo apt upgrade -y
+RUN apt update && apt upgrade -y
 RUN apt install curl
 RUN curl -sL https://github.com/shyiko/jabba/raw/master/install.sh | \
     JABBA_COMMAND="install adopt@1.8.0-232 -o /jdk" bash
