@@ -22,6 +22,7 @@ ARG USER_HOME_DIR="/root"
 
 RUN apt update && apt upgrade -y
 RUN apt install curl -y
+RUN apt install ufw -y
 RUN curl -sL https://github.com/shyiko/jabba/raw/master/install.sh | \
     JABBA_COMMAND="install adopt@1.8.0-232 -o /jdk" bash
 
@@ -30,11 +31,11 @@ ENV PATH $JAVA_HOME/bin:$PATH
 RUN java -version
 
 #Firewall
+EXPOSE 8899
 RUN ufw allow 22
 RUN ufw allow 8899
 RUN ufw default deny
 RUN ufw --force enable
 
 COPY 03_demo/target/vaadin-app.jar .
-EXPOSE 8899
 CMD ["java", "-jar", "vaadin-app.jar"]
