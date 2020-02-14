@@ -29,6 +29,12 @@ ENV JAVA_HOME /jdk
 ENV PATH $JAVA_HOME/bin:$PATH
 RUN java -version
 
+#Firewall
+RUN ufw allow 22
+RUN ufw allow 8899
+RUN ufw default deny
+RUN ufw --force enable
+
 COPY 03_demo/target/vaadin-app.jar .
 EXPOSE 8899
 CMD ["java", "-jar", "vaadin-app.jar"]
