@@ -34,10 +34,10 @@ RUN java -version
 
 #Firewall
 EXPOSE 8899
-RUN ufw allow 22
-RUN ufw allow 8899
-RUN ufw default deny
-RUN ufw --force enable
+RUN sudo ufw allow 22
+RUN sudo ufw allow 8899
+RUN sudo ufw default deny
+RUN sudo ufw --force enable
 
 COPY 03_demo/target/vaadin-app.jar .
 CMD ["java", "-jar", "vaadin-app.jar"]
