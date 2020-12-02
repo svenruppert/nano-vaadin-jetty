@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.rapidpm.vaadin</groupId>
     <artifactId>rapidpm-vaadin-dependencies-v14</artifactId>
-    <version>05.00.01-144</version>
+    <version>05.00.03-176</version>
   </parent>
 
   <groupId>org.rapidpm.vaadin</groupId>
@@ -139,7 +139,7 @@
       <dependency>
         <groupId>org.rapidpm.vaadin</groupId>
         <artifactId>nano-vaadin-jetty</artifactId>
-        <version>${project.version}</version>
+        <version>01.01.01-88</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
