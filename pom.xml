@@ -82,7 +82,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <jdk.version>1.8</jdk.version>
-    <jetty.version>9.4.35.v20201120</jetty.version>
+    <jetty.version>9.4.41.v20210516</jetty.version>
 
 
   </properties>
