@@ -178,3 +178,4 @@ operadriver-mac-64bit.version
 operadriver-mac-64bit/
 phantomjs-mac-64bit
 phantomjs-mac-64bit.version
+/src/main/frontend/generated/

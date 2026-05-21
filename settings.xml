@@ -22,7 +22,6 @@
 
 <!--  This is for Heroku deployments-->
   <activeProfiles>
-    <activeProfile>_java-and-kotlin</activeProfile>
     <activeProfile>vaadin-install-nodejs</activeProfile>
   </activeProfiles>
 </settings>
