@@ -88,15 +88,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.svenruppert</groupId>
-      <artifactId>functional-reactive</artifactId>
-      <version>03.00.00</version>
-    </dependency>
-    <dependency>
-      <groupId>com.svenruppert</groupId>
-      <artifactId>core</artifactId>
-    </dependency>
-    <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
       <version>6.1.0</version>
@@ -129,11 +120,6 @@
     </dependency>
 
     <dependency>
-      <groupId>commons-cli</groupId>
-      <artifactId>commons-cli</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin-button-flow</artifactId>
       <scope>${vaadin.ui.scope}</scope>
@@ -148,6 +134,10 @@
       <artifactId>flow-html-components</artifactId>
       <scope>${vaadin.ui.scope}</scope>
     </dependency>
+    <!-- The `vaadin` meta artifact pulls in flow-react etc. that vaadin-maven-plugin's generated
+         Flow.tsx needs, and the full UI component set that browserless-test-shared mocks against.
+         Default scope is test (library mode); the `demo` profile elevates it to compile so the
+         bundle build can include it. -->
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin</artifactId>
@@ -160,33 +150,6 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <transformers>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <manifestEntries>
-                    <Main-Class>com.svenruppert.vaadin.nano.CoreUIServiceJava</Main-Class>
-                  </manifestEntries>
-                </transformer>
-              </transformers>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
 
   <profiles>
     <profile>

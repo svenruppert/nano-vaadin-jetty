@@ -25,17 +25,11 @@ package com.svenruppert.vaadin.nano;
  * #L%
  */
 
-import com.svenruppert.dependencies.core.logger.HasLogger;
-import com.svenruppert.functional.model.Result;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinServlet;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ScanResult;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
 import org.eclipse.jetty.ee11.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.ee11.servlet.ServletHolder;
 import org.eclipse.jetty.ee11.webapp.MetaInfConfiguration;
@@ -56,28 +50,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.svenruppert.functional.model.Result.failure;
-import static java.lang.System.getProperty;
-import static java.lang.System.setProperty;
+public final class CoreUIServiceJava {
 
-/**
- *
- */
-public class CoreUIServiceJava
-    implements HasLogger {
-
-  public static final String CORE_UI_SERVER_HOST_DEFAULT = "0.0.0.0";
-  public static final String CORE_UI_SERVER_PORT_DEFAULT = "8899";
-
-  public static final String CORE_UI_SERVER_HOST = "core-ui-server-host";
-  public static final String CORE_UI_SERVER_PORT = "core-ui-server-port";
-  public static final String CLI_HOST = "host";
-  public static final String CLI_PORT = "port";
-  private Result<Server> jetty = failure("not initialised so far");
-
-  static void main(String[] args)
-      throws ParseException {
-    new CoreUIServiceJava().executeCLI(args).startup();
+  private CoreUIServiceJava() {
   }
 
   public static Server startServer(String host, int port)
@@ -172,39 +147,5 @@ public class CoreUIServiceJava
     Files.createDirectories(parent);
     Files.writeString(target,
                       "{\"productionMode\":true,\"eagerServerLoad\":false,\"react.enable\":true}\n");
-  }
-
-  public Result<Server> jetty() {
-    return jetty;
-  }
-
-  public CoreUIServiceJava executeCLI(String[] args)
-      throws ParseException {
-    final Options options = new Options();
-    options.addOption(CLI_HOST, true, "host to use");
-    options.addOption(CLI_PORT, true, "port to use");
-
-    DefaultParser parser = new DefaultParser();
-    CommandLine cmd = parser.parse(options, args);
-
-    if (cmd.hasOption(CLI_HOST)) {
-      setProperty(CoreUIServiceJava.CORE_UI_SERVER_HOST, cmd.getOptionValue(CLI_HOST));
-    }
-    if (cmd.hasOption(CLI_PORT)) {
-      setProperty(CoreUIServiceJava.CORE_UI_SERVER_PORT, cmd.getOptionValue(CLI_PORT));
-    }
-    return this;
-  }
-
-  public void startup() {
-    try {
-      int port = Integer.parseInt(getProperty(CORE_UI_SERVER_PORT, CORE_UI_SERVER_PORT_DEFAULT));
-      String host = getProperty(CORE_UI_SERVER_HOST, CORE_UI_SERVER_HOST_DEFAULT);
-      Server server = startServer(host, port);
-      jetty = Result.success(server);
-      server.join();
-    } catch (Exception e) {
-      logger().warn(e.getLocalizedMessage(), e);
-    }
   }
 }

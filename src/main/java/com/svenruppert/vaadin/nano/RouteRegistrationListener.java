@@ -39,7 +39,7 @@ import java.util.List;
 // runs before any request can be served, which avoids the race of registering after server.start().
 // Needed because embedded Jetty's annotation scanner only walks JARs and WEB-INF/classes, so
 // @Route classes living in plain classpath directories never reach Vaadin's RouteRegistryInitializer.
-final class RouteRegistrationListener implements ServletContextListener {
+final class   RouteRegistrationListener implements ServletContextListener {
 
   private final List<Class<? extends Component>> routes;
 
