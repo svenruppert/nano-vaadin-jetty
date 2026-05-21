@@ -1,9 +1,11 @@
-node/*
-node_modules/*
+*/node/*
+*/node_modules/*
 package.json
 package-lock.json
 webpack.config.js
 webpack.generated.js
+node/*
+node_modules/*
 
 
 .idea/*
