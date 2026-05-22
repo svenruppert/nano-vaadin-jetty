@@ -32,15 +32,38 @@
 
   <groupId>com.svenruppert.vaadin</groupId>
   <artifactId>nano-vaadin-jetty</artifactId>
-  <version>02.00.00-SRU-SNAPSHOT</version>
+  <version>03.00.00</version>
   <packaging>jar</packaging>
 
+  <name>Nano Vaadin Jetty</name>
+  <description>A small Java library that boots Vaadin Flow on embedded Jetty 12 (EE11)
+    with a tiny API to register @Route classes explicitly or via classpath scan.</description>
   <inceptionYear>2017</inceptionYear>
   <organization>
     <name>Vaadin</name>
     <url>http://www.vaadin.com</url>
   </organization>
   <url>https://github.com/vaadin-developer/nano-vaadin-jetty</url>
+
+  <licenses>
+    <license>
+      <name>European Union Public Licence 1.2</name>
+      <url>https://spdx.org/licenses/EUPL-1.2.html</url>
+      <distribution>repo</distribution>
+      <comments>SPDX: EUPL-1.2</comments>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Sven Ruppert</name>
+      <email>sven.ruppert@gmail.com</email>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
 
   <scm>
     <url>https://github.com/vaadin-developer/nano-vaadin-jetty</url>
@@ -96,6 +119,7 @@
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>flow-server</artifactId>
+      <version>${vaadin.version}</version>
     </dependency>
     <dependency>
       <groupId>io.github.classgraph</groupId>
@@ -122,16 +146,19 @@
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin-button-flow</artifactId>
+      <version>${vaadin.version}</version>
       <scope>${vaadin.ui.scope}</scope>
     </dependency>
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin-ordered-layout-flow</artifactId>
+      <version>${vaadin.version}</version>
       <scope>${vaadin.ui.scope}</scope>
     </dependency>
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>flow-html-components</artifactId>
+      <version>${vaadin.version}</version>
       <scope>${vaadin.ui.scope}</scope>
     </dependency>
     <!-- The `vaadin` meta artifact pulls in flow-react etc. that vaadin-maven-plugin's generated
@@ -141,6 +168,7 @@
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin</artifactId>
+      <version>${vaadin.version}</version>
       <scope>${vaadin.ui.scope}</scope>
     </dependency>
     <dependency>

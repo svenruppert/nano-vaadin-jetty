@@ -85,6 +85,35 @@ then launch `DemoApplication.main()`.
 
 Open `http://127.0.0.1:8080/` — button + click counter.
 
+## Releasing to Maven Central
+
+Deploy targets are inherited from the parent
+`com.svenruppert:dependencies:06.02.00`. Two paths exist:
+
+- **`mvn deploy`** (no profile) goes to the legacy OSSRH endpoint
+  `https://s01.oss.sonatype.org/...`. **OSSRH was shut down on 2025-06-30**;
+  this path no longer works and is only kept for archival reasons.
+- **`mvn deploy -P _deploy`** activates `central-publishing-maven-plugin`
+  and publishes to the **Sonatype Central Portal**
+  (`central.sonatype.com`) — the current replacement for OSSRH.
+
+For an actual release to Central use the bundled profiles together:
+
+```bash
+./mvnw -P _deploy,_release_prepare,_release_sign-artifacts deploy
+```
+
+- `_release_prepare` attaches the `-sources.jar` and `-javadoc.jar`
+  (mandatory for Central)
+- `_release_sign-artifacts` GPG-signs every artifact (mandatory for
+  Central)
+- `_deploy` runs the actual upload via the central-publishing plugin
+
+Credentials must live in `~/.m2/settings.xml` under
+`<server><id>central</id>...</server>` — username is the Central Portal
+token name, password is the token value. The GPG signing key must be
+available to `gpg` on the build host.
+
 ## License
 
 Distributed under the **European Union Public Licence v1.2** (SPDX:
