@@ -263,6 +263,19 @@
                             </execution>
                         </executions>
                     </plugin>
+                    <!-- build-frontend writes the demo bundle into target/classes/META-INF/VAADIN/,
+                         which is fine for `exec:java` (runs against target/classes directly) but
+                         pollutes the default jar with ~6.5 MB of Vaadin frontend assets. Exclude
+                         the bundle from the jar so the library artefact stays minimal even when
+                         someone builds with -P demo locally. -->
+                    <plugin>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>META-INF/VAADIN/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
