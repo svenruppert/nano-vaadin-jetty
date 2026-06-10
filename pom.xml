@@ -27,7 +27,7 @@
   <parent>
     <groupId>com.svenruppert</groupId>
     <artifactId>dependencies</artifactId>
-    <version>06.02.00</version>
+    <version>06.02.02</version>
   </parent>
 
   <groupId>com.svenruppert.vaadin</groupId>
@@ -83,10 +83,18 @@
     <vaadin-browserless-test.version>1.0.0</vaadin-browserless-test.version>
     <!-- Default: UI components only on test classpath (library mode). The `demo` profile sets this to `compile`. -->
     <vaadin.ui.scope>test</vaadin.ui.scope>
+    <!-- Scope PIT to the library code only (skip the demo views/app under src/test/java/demo).
+         Parent default targets `junit.com.svenruppert.*` for tests, which does not match our
+         `demo.*` package, so PIT would find zero tests and report 0 %. -->
+    <pitest-prod-classes>com.svenruppert.vaadin.nano.*</pitest-prod-classes>
+    <pitest-test-classes>demo.*</pitest-test-classes>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <!-- jackson-databind 3.1.x transitively pulls in jackson-annotations 3.0-rc5 (a release
+           candidate), which makes MapperBuilder.<clinit> throw NoClassDefFoundError at runtime.
+           Pin to the last stable 2.x line until Jackson ships a stable 3.x for annotations. -->
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-annotations</artifactId>
@@ -110,6 +118,14 @@
   </dependencyManagement>
 
   <dependencies>
+    <dependency>
+      <groupId>com.svenruppert</groupId>
+      <artifactId>functional-reactive</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.svenruppert</groupId>
+      <artifactId>core</artifactId>
+    </dependency>
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
@@ -178,6 +194,31 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Parent forces eupl_v1_1 template via update-file-header in process-sources, which
+           rewrites every Java header back to "Version 1.1" — and the plugin has no built-in
+           eupl_v1_2 template. Skip the plugin for this module; the headers in src/ are the
+           canonical 1.2 version. -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+        <executions>
+          <execution>
+            <id>first</id>
+            <phase>none</phase>
+            <goals>
+              <goal>update-file-header</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
   <profiles>
     <profile>

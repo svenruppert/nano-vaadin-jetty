@@ -8,14 +8,14 @@ package com.svenruppert.vaadin.nano;
  * %%
  * Copyright (C) 2017 - 2026 Vaadin
  * %%
- * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
  * approved by the European Commission - subsequent versions of the
  * EUPL (the "Licence");
  *
  * You may not use this work except in compliance with the Licence.
  * You may obtain a copy of the Licence at:
  *
- * http://ec.europa.eu/idabc/eupl5
+ * https://joinup.ec.europa.eu/software/page/eupl
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the Licence is distributed on an "AS IS" basis,
@@ -39,7 +39,7 @@ import java.util.List;
 // runs before any request can be served, which avoids the race of registering after server.start().
 // Needed because embedded Jetty's annotation scanner only walks JARs and WEB-INF/classes, so
 // @Route classes living in plain classpath directories never reach Vaadin's RouteRegistryInitializer.
-final class   RouteRegistrationListener implements ServletContextListener {
+final class RouteRegistrationListener implements ServletContextListener {
 
   private final List<Class<? extends Component>> routes;
 
