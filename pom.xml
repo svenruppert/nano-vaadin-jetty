@@ -22,228 +22,250 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>com.svenruppert</groupId>
-    <artifactId>dependencies</artifactId>
-    <version>06.02.02</version>
-  </parent>
+    <parent>
+        <groupId>com.svenruppert</groupId>
+        <artifactId>dependencies</artifactId>
+        <version>06.02.02</version>
+    </parent>
 
-  <groupId>com.svenruppert.vaadin</groupId>
-  <artifactId>nano-vaadin-jetty</artifactId>
-  <version>03.00.01-SNAPSHOT</version>
-  <packaging>jar</packaging>
+    <groupId>com.svenruppert.vaadin</groupId>
+    <artifactId>nano-vaadin-jetty</artifactId>
+    <version>03.00.01-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-  <name>Nano Vaadin Jetty</name>
-  <description>A small Java library that boots Vaadin Flow on embedded Jetty 12 (EE11)
-    with a tiny API to register @Route classes explicitly or via classpath scan.</description>
-  <inceptionYear>2017</inceptionYear>
-  <organization>
-    <name>Vaadin</name>
-    <url>http://www.vaadin.com</url>
-  </organization>
-  <url>https://github.com/vaadin-developer/nano-vaadin-jetty</url>
-
-  <licenses>
-    <license>
-      <name>European Union Public Licence 1.2</name>
-      <url>https://spdx.org/licenses/EUPL-1.2.html</url>
-      <distribution>repo</distribution>
-      <comments>SPDX: EUPL-1.2</comments>
-    </license>
-  </licenses>
-
-  <developers>
-    <developer>
-      <name>Sven Ruppert</name>
-      <email>sven.ruppert@gmail.com</email>
-      <roles>
-        <role>Developer</role>
-      </roles>
-      <timezone>+1</timezone>
-    </developer>
-  </developers>
-
-  <scm>
+    <name>Nano Vaadin Jetty</name>
+    <description>A small Java library that boots Vaadin Flow on embedded Jetty 12 (EE11)
+        with a tiny API to register @Route classes explicitly or via classpath scan.
+    </description>
+    <inceptionYear>2017</inceptionYear>
+    <organization>
+        <name>Vaadin</name>
+        <url>http://www.vaadin.com</url>
+    </organization>
     <url>https://github.com/vaadin-developer/nano-vaadin-jetty</url>
-    <connection>scm:git:https://github.com/vaadin-developer/nano-vaadin-jetty.git</connection>
-    <developerConnection>scm:git:https://github.com/vaadin-developer/nano-vaadin-jetty</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
-  <issueManagement>
-    <system>Github</system>
-    <url>https://github.com/vaadin-developer/nano-vaadin-jetty/issues</url>
-  </issueManagement>
 
-  <properties>
-    <jetty.version>12.1.8</jetty.version>
-    <vaadin.version>25.1.1</vaadin.version>
-    <jackson.version>3.1.0</jackson.version>
-    <vaadin-browserless-test.version>1.0.0</vaadin-browserless-test.version>
-    <!-- Default: UI components only on test classpath (library mode). The `demo` profile sets this to `compile`. -->
-    <vaadin.ui.scope>test</vaadin.ui.scope>
-    <!-- Scope PIT to the library code only (skip the demo views/app under src/test/java/demo).
-         Parent default targets `junit.com.svenruppert.*` for tests, which does not match our
-         `demo.*` package, so PIT would find zero tests and report 0 %. -->
-    <pitest-prod-classes>com.svenruppert.vaadin.nano.*</pitest-prod-classes>
-    <pitest-test-classes>demo.*</pitest-test-classes>
-  </properties>
+    <licenses>
+        <license>
+            <name>European Union Public Licence 1.2</name>
+            <url>https://spdx.org/licenses/EUPL-1.2.html</url>
+            <distribution>repo</distribution>
+            <comments>SPDX: EUPL-1.2</comments>
+        </license>
+    </licenses>
 
-  <dependencyManagement>
+    <developers>
+        <developer>
+            <name>Sven Ruppert</name>
+            <email>sven.ruppert@gmail.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/vaadin-developer/nano-vaadin-jetty</url>
+        <connection>scm:git:https://github.com/vaadin-developer/nano-vaadin-jetty.git</connection>
+        <developerConnection>scm:git:https://github.com/vaadin-developer/nano-vaadin-jetty</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/vaadin-developer/nano-vaadin-jetty/issues</url>
+    </issueManagement>
+
+    <properties>
+        <jetty.version>12.1.8</jetty.version>
+        <vaadin.version>25.1.1</vaadin.version>
+        <jackson.version>3.1.0</jackson.version>
+        <vaadin-browserless-test.version>1.0.0</vaadin-browserless-test.version>
+        <!-- Default: UI components only on test classpath (library mode). The `demo` profile sets this to `compile`. -->
+        <vaadin.ui.scope>test</vaadin.ui.scope>
+        <!-- Scope PIT to the library code only (skip the demo views/app under src/test/java/demo).
+             Parent default targets `junit.com.svenruppert.*` for tests, which does not match our
+             `demo.*` package, so PIT would find zero tests and report 0 %. -->
+        <pitest-prod-classes>com.svenruppert.vaadin.nano.*</pitest-prod-classes>
+        <pitest-test-classes>demo.*</pitest-test-classes>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Parent BOM pins slf4j-api/slf4j-simple to 2.1.0-alpha1; a library published to
+                 Central must not carry an alpha on its public API. Downgrade to the last stable
+                 2.0.x release. -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>2.0.17</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>2.0.17</version>
+            </dependency>
+            <!-- jackson-databind 3.1.x transitively pulls in jackson-annotations 3.0-rc5 (a release
+                 candidate), which makes MapperBuilder.<clinit> throw NoClassDefFoundError at runtime.
+                 Pin to the last stable 2.x line until Jackson ships a stable 3.x for annotations. -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.21</version>
+            </dependency>
+            <dependency>
+                <groupId>tools.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
-      <!-- jackson-databind 3.1.x transitively pulls in jackson-annotations 3.0-rc5 (a release
-           candidate), which makes MapperBuilder.<clinit> throw NoClassDefFoundError at runtime.
-           Pin to the last stable 2.x line until Jackson ships a stable 3.x for annotations. -->
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-annotations</artifactId>
-        <version>2.21</version>
-      </dependency>
-      <dependency>
-        <groupId>tools.jackson</groupId>
-        <artifactId>jackson-bom</artifactId>
-        <version>${jackson.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-bom</artifactId>
-        <version>${vaadin.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
-  <dependencies>
-    <dependency>
-      <groupId>com.svenruppert</groupId>
-      <artifactId>functional-reactive</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.svenruppert</groupId>
-      <artifactId>core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <version>6.1.0</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.vaadin</groupId>
-      <artifactId>flow-server</artifactId>
-      <version>${vaadin.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.github.classgraph</groupId>
-      <artifactId>classgraph</artifactId>
-      <version>4.8.184</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.eclipse.jetty</groupId>
-      <artifactId>jetty-server</artifactId>
-      <version>${jetty.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.jetty.ee11</groupId>
-      <artifactId>jetty-ee11-webapp</artifactId>
-      <version>${jetty.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.jetty.ee11</groupId>
-      <artifactId>jetty-ee11-annotations</artifactId>
-      <version>${jetty.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.vaadin</groupId>
-      <artifactId>vaadin-button-flow</artifactId>
-      <version>${vaadin.version}</version>
-      <scope>${vaadin.ui.scope}</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.vaadin</groupId>
-      <artifactId>vaadin-ordered-layout-flow</artifactId>
-      <version>${vaadin.version}</version>
-      <scope>${vaadin.ui.scope}</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.vaadin</groupId>
-      <artifactId>flow-html-components</artifactId>
-      <version>${vaadin.version}</version>
-      <scope>${vaadin.ui.scope}</scope>
-    </dependency>
-    <!-- The `vaadin` meta artifact pulls in flow-react etc. that vaadin-maven-plugin's generated
-         Flow.tsx needs, and the full UI component set that browserless-test-shared mocks against.
-         Default scope is test (library mode); the `demo` profile elevates it to compile so the
-         bundle build can include it. -->
-    <dependency>
-      <groupId>com.vaadin</groupId>
-      <artifactId>vaadin</artifactId>
-      <version>${vaadin.version}</version>
-      <scope>${vaadin.ui.scope}</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.vaadin</groupId>
-      <artifactId>browserless-test-shared</artifactId>
-      <version>${vaadin-browserless-test.version}</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <plugins>
-      <!-- Parent forces eupl_v1_1 template via update-file-header in process-sources, which
-           rewrites every Java header back to "Version 1.1" — and the plugin has no built-in
-           eupl_v1_2 template. Skip the plugin for this module; the headers in src/ are the
-           canonical 1.2 version. -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>license-maven-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-        <executions>
-          <execution>
-            <id>first</id>
-            <phase>none</phase>
-            <goals>
-              <goal>update-file-header</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-
-  <profiles>
-    <profile>
-      <id>demo</id>
-      <properties>
-        <vaadin.ui.scope>compile</vaadin.ui.scope>
-      </properties>
-      <build>
-        <plugins>
-          <plugin>
+        <!-- Parent declares slf4j-simple as a direct compile-scope dependency, so every child
+             inherits the SLF4J binding into its public jar. A library must not pin its consumers
+             to a specific binding — override the inherited declaration with test scope. -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.svenruppert</groupId>
+            <artifactId>functional-reactive</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.svenruppert</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-maven-plugin</artifactId>
+            <artifactId>flow-server</artifactId>
             <version>${vaadin.version}</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>prepare-frontend</goal>
-                  <goal>build-frontend</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
+        </dependency>
+        <dependency>
+            <groupId>io.github.classgraph</groupId>
+            <artifactId>classgraph</artifactId>
+            <version>4.8.184</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.ee11</groupId>
+            <artifactId>jetty-ee11-webapp</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.ee11</groupId>
+            <artifactId>jetty-ee11-annotations</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-button-flow</artifactId>
+            <version>${vaadin.version}</version>
+            <scope>${vaadin.ui.scope}</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-ordered-layout-flow</artifactId>
+            <version>${vaadin.version}</version>
+            <scope>${vaadin.ui.scope}</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-html-components</artifactId>
+            <version>${vaadin.version}</version>
+            <scope>${vaadin.ui.scope}</scope>
+        </dependency>
+        <!-- The `vaadin` meta artifact pulls in flow-react etc. that vaadin-maven-plugin's generated
+             Flow.tsx needs, and the full UI component set that browserless-test-shared mocks against.
+             Default scope is test (library mode); the `demo` profile elevates it to compile so the
+             bundle build can include it. -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin</artifactId>
+            <version>${vaadin.version}</version>
+            <scope>${vaadin.ui.scope}</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>browserless-test-shared</artifactId>
+            <version>${vaadin-browserless-test.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Parent forces eupl_v1_1 template via update-file-header in process-sources, which
+                 rewrites every Java header back to "Version 1.1" — and the plugin has no built-in
+                 eupl_v1_2 template. Skip the plugin for this module; the headers in src/ are the
+                 canonical 1.2 version. -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <skipCheckLicense>true</skipCheckLicense>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>first</id>
+                        <phase>none</phase>
+                        <goals>
+                            <goal>update-file-header</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
-      </build>
-    </profile>
-  </profiles>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>demo</id>
+            <properties>
+                <vaadin.ui.scope>compile</vaadin.ui.scope>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>vaadin-maven-plugin</artifactId>
+                        <version>${vaadin.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-frontend</goal>
+                                    <goal>build-frontend</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

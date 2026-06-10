@@ -59,6 +59,16 @@ can be served.
 Views packaged inside JARs are still picked up by Vaadin's standard scanner
 and need no manual registration.
 
+### Frontend bundle is the consumer's responsibility
+
+The library does **not** ship its own `flow-build-info.json` or a
+prebuilt frontend bundle. Consumers wire `vaadin-maven-plugin` into
+their own build (or use the `demo` profile in this repo) so that
+`prepare-frontend` / `build-frontend` produce both the token file and
+the bundle under `META-INF/VAADIN/`. If you launch a `CoreUIServiceJava`
+server without that step, Vaadin will return HTTP 500 on the first
+request with `Unable to find index.html`.
+
 ## Build
 
 ```bash
@@ -109,6 +119,20 @@ available to `gpg` on the build host.
 > The bare `mvn deploy` (no profile) targets the legacy OSSRH endpoint
 > at `s01.oss.sonatype.org`, which was shut down on 2025-06-30 — that
 > path no longer works. Always use the `_deploy` profile.
+
+## Conventions
+
+### License headers
+
+All Java sources carry the EUPL 1.2 header. The parent
+`com.svenruppert:dependencies` runs
+`license-maven-plugin:update-file-header` in `process-sources` with
+`<licenseName>eupl_v1_1</licenseName>` — and the plugin (2.7.1) has no
+built-in `eupl_v1_2` template. This module therefore disables the
+plugin via `<skip>true</skip>` and an unbound execution phase, so the
+canonical 1.2 headers in `src/` stay intact. When adding a new Java
+file, hand-copy the header from an existing one rather than relying on
+the plugin to generate it.
 
 ## License
 
