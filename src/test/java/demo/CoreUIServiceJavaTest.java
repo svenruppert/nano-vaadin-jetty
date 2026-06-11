@@ -38,8 +38,11 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
 
@@ -51,9 +54,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CoreUIServiceJavaTest {
 
+  // A classloader that exposes only the frontend-bundle probe target. Built once for the
+  // whole test class and passed to the 4-arg startServer overload so happy-path tests stay
+  // independent of the runtime classpath layout. Putting the stub on src/test/resources
+  // would shadow the real bundle when the demo is launched via `exec:java
+  // -Dexec.classpathScope=test` after `-P demo package` — see the deliberate omission of
+  // META-INF/VAADIN/webapp/ under src/test/resources/.
+  private static final ClassLoader BUNDLE_CL = bundleStubClassLoader();
+
   @Test
   void startsJettyOnEphemeralPortWithVaadinServlet() throws Exception {
-    Result<Server, Exception> result = CoreUIServiceJava.startServer("127.0.0.1", 0);
+    Result<Server, Exception> result =
+        CoreUIServiceJava.startServer("127.0.0.1", 0, List.of(), BUNDLE_CL);
     assertTrue(result.isSuccess(), () -> "startServer failed: " + result);
     Server server = result.getOrThrow();
     try {
@@ -89,7 +101,7 @@ class CoreUIServiceJavaTest {
   void startsWithExplicitRequestedPort() throws Exception {
     int requestedPort = findFreePort();
     Result<Server, Exception> result =
-        CoreUIServiceJava.startServer("127.0.0.1", requestedPort);
+        CoreUIServiceJava.startServer("127.0.0.1", requestedPort, List.of(), BUNDLE_CL);
     assertTrue(result.isSuccess());
     Server server = result.getOrThrow();
     try {
@@ -104,12 +116,13 @@ class CoreUIServiceJavaTest {
 
   @Test
   void returnsFailureWhenPortAlreadyBound() throws Exception {
-    Result<Server, Exception> first = CoreUIServiceJava.startServer("127.0.0.1", 0);
+    Result<Server, Exception> first =
+        CoreUIServiceJava.startServer("127.0.0.1", 0, List.of(), BUNDLE_CL);
     Server occupier = first.getOrThrow();
     int boundPort = ((ServerConnector) occupier.getConnectors()[0]).getLocalPort();
     try {
       Result<Server, Exception> second =
-          CoreUIServiceJava.startServer("127.0.0.1", boundPort);
+          CoreUIServiceJava.startServer("127.0.0.1", boundPort, List.of(), BUNDLE_CL);
       assertTrue(second.isFailure(), "starting on an already-bound port must yield failure");
     } finally {
       occupier.stop();
@@ -120,7 +133,7 @@ class CoreUIServiceJavaTest {
   @Test
   void startsServerWithExplicitRoutesAndRegistersThem() throws Exception {
     Result<Server, Exception> result =
-        CoreUIServiceJava.startServer("127.0.0.1", 0, List.of(DemoView.class));
+        CoreUIServiceJava.startServer("127.0.0.1", 0, List.of(DemoView.class), BUNDLE_CL);
     assertTrue(result.isSuccess());
     Server server = result.getOrThrow();
     try {
@@ -153,6 +166,23 @@ class CoreUIServiceJavaTest {
   }
 
   @Test
+  void twoArgOverloadProbesViaDefaultClassLoaderAndFailsWithoutBundle() {
+    // src/test/resources deliberately does not ship a bundle stub (so the demo
+    // launched via `exec:java -Dexec.classpathScope=test` cannot mistake the stub
+    // for the real bundle). Consequently the 2-arg overload — which probes via
+    // the library's own ClassLoader — must surface Result.failure here.
+    Result<Server, Exception> result = CoreUIServiceJava.startServer("127.0.0.1", 0);
+    assertTrue(result.isFailure(), () -> "expected failure, got: " + result);
+  }
+
+  @Test
+  void threeArgOverloadProbesViaDefaultClassLoaderAndFailsWithoutBundle() {
+    Result<Server, Exception> result =
+        CoreUIServiceJava.startServer("127.0.0.1", 0, List.of(DemoView.class));
+    assertTrue(result.isFailure(), () -> "expected failure, got: " + result);
+  }
+
+  @Test
   void failsLoudlyWhenFrontendBundleIsMissing() {
     ClassLoader emptyClassLoader = new URLClassLoader("emptyForBundleProbe", new URL[0], null);
     Result<Server, Exception> result = CoreUIServiceJava.startServer(
@@ -168,6 +198,24 @@ class CoreUIServiceJavaTest {
   private static int findFreePort() throws Exception {
     try (var socket = new java.net.ServerSocket(0)) {
       return socket.getLocalPort();
+    }
+  }
+
+  // Drops a minimal META-INF/VAADIN/webapp/index.html into a temp dir and returns a
+  // URLClassLoader rooted at it, parented to the system loader so Vaadin's own classes
+  // still resolve. The 4-arg startServer probes this classloader for the bundle marker;
+  // happy-path tests thus pass without polluting src/test/resources/.
+  private static ClassLoader bundleStubClassLoader() {
+    try {
+      Path stubRoot = Files.createTempDirectory("nvj-bundle-stub");
+      Path indexHtml = stubRoot.resolve("META-INF/VAADIN/webapp/index.html");
+      Files.createDirectories(indexHtml.getParent());
+      Files.writeString(indexHtml, "<!doctype html><title>nvj bundle stub</title>\n");
+      return new URLClassLoader("nvj-bundle-stub",
+                                new URL[] { stubRoot.toUri().toURL() },
+                                CoreUIServiceJava.class.getClassLoader());
+    } catch (IOException e) {
+      throw new RuntimeException("failed to set up bundle stub classloader", e);
     }
   }
 }
