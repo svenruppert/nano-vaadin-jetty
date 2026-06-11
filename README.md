@@ -18,6 +18,13 @@ Single-module Maven project. The library lives under
 - `src/main/java/com/svenruppert/vaadin/nano/` — `CoreUIServiceJava`,
   `RouteRegistrationListener`
 - `src/test/java/demo/` — runnable demo (`DemoApplication`, `DemoView`) and tests
+- `src/test/resources/META-INF/VAADIN/webapp/index.html` — stub that
+  satisfies the fail-fast bundle probe during tests (see [Frontend
+  bundle is the consumer's
+  responsibility](#frontend-bundle-is-the-consumers-responsibility))
+- `scripts/` — release helpers (`publish-to-central.sh`,
+  `build-central-bundle.sh`); see [Release helper
+  scripts](#release-helper-scripts)
 
 Vaadin UI dependencies (`vaadin-button-flow`, `vaadin-ordered-layout-flow`,
 `flow-html-components`, `vaadin`) are scoped to **test** by default so the
