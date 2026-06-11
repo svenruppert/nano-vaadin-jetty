@@ -63,6 +63,27 @@ public final class CoreUIServiceJava {
   // via {@link #scanForRoutes(String...)}.
   public static Result<Server, Exception> startServer(String host, int port,
                                                       Collection<Class<? extends Component>> routes) {
+    return startServer(host, port, routes, CoreUIServiceJava.class.getClassLoader());
+  }
+
+  // Variant that takes an explicit ClassLoader for the frontend-bundle probe. The 3-arg
+  // overload uses the library's own ClassLoader, which is the right answer in the typical
+  // case. Pass a different ClassLoader here when the bundle lives in a non-standard loader
+  // (e.g. a plugin/module isolation setup), or in tests that need to exercise the
+  // missing-bundle branch with an empty loader.
+  public static Result<Server, Exception> startServer(String host, int port,
+                                                      Collection<Class<? extends Component>> routes,
+                                                      ClassLoader bundleClassLoader) {
+    // Fail fast (with a useful message) instead of letting Vaadin return HTTP 500
+    // "Unable to find index.html" on the first request: production mode without a built
+    // frontend bundle is unrecoverable, so report it at startup.
+    if (bundleClassLoader.getResource("META-INF/VAADIN/webapp/index.html") == null) {
+      return Result.failure(new IllegalStateException(
+          "Vaadin frontend bundle not on the classpath "
+          + "(expected META-INF/VAADIN/webapp/index.html). "
+          + "Run `vaadin-maven-plugin build-frontend` in the consuming project "
+          + "(or `./mvnw -P demo -DskipTests package` in this repo) before launching the server."));
+    }
     try {
       Server server = new Server();
       HttpConfiguration httpConfig = new HttpConfiguration();

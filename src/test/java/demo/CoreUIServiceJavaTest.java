@@ -38,6 +38,8 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.junit.jupiter.api.Test;
 
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.List;
 import java.util.Set;
 
@@ -148,6 +150,19 @@ class CoreUIServiceJavaTest {
     Set<Class<? extends Component>> routes = CoreUIServiceJava.scanForRoutes("java.lang");
     assertTrue(routes.isEmpty(),
                () -> "java.lang holds no @Route classes, got " + routes);
+  }
+
+  @Test
+  void failsLoudlyWhenFrontendBundleIsMissing() {
+    ClassLoader emptyClassLoader = new URLClassLoader("emptyForBundleProbe", new URL[0], null);
+    Result<Server, Exception> result = CoreUIServiceJava.startServer(
+        "127.0.0.1", 0, List.<Class<? extends Component>>of(), emptyClassLoader);
+    assertTrue(result.isFailure(), () -> "expected failure, got: " + result);
+    String message = result.fold(s -> "", err -> err.getMessage());
+    assertTrue(message.contains("index.html"),
+               () -> "error message should mention index.html, got: " + message);
+    assertTrue(message.contains("build-frontend"),
+               () -> "error message should point at build-frontend, got: " + message);
   }
 
   private static int findFreePort() throws Exception {

@@ -65,9 +65,19 @@ The library does **not** ship its own `flow-build-info.json` or a
 prebuilt frontend bundle. Consumers wire `vaadin-maven-plugin` into
 their own build (or use the `demo` profile in this repo) so that
 `prepare-frontend` / `build-frontend` produce both the token file and
-the bundle under `META-INF/VAADIN/`. If you launch a `CoreUIServiceJava`
-server without that step, Vaadin will return HTTP 500 on the first
-request with `Unable to find index.html`.
+the bundle under `META-INF/VAADIN/`.
+
+`startServer(...)` probes the classpath for
+`META-INF/VAADIN/webapp/index.html` before booting Jetty. If the
+bundle is missing, the call short-circuits to
+`Result.failure(IllegalStateException)` *immediately*, with a message
+naming the missing path and pointing at `build-frontend`. You will not
+see Vaadin's runtime HTTP 500 `Unable to find index.html` — the
+failure surfaces at startup instead.
+
+If you load the bundle from a non-standard ClassLoader (modular setups,
+shaded jars, plugin isolation), use the 4-arg overload to pass that
+loader for the probe.
 
 ## Build
 
