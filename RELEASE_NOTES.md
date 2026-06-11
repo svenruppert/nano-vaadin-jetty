@@ -1,4 +1,9 @@
-# Release Notes — `nano-vaadin-jetty 03.00.01`
+# Release Notes — `nano-vaadin-jetty 04.00.00`
+
+This is a **major release**. `CoreUIServiceJava.startServer(...)` no
+longer throws — it returns `Result<Server, Exception>`. See the Breaking
+Change section below for the one-line migration; everything else in
+this release is additive or internal cleanup.
 
 ## ⚠️ Breaking Change
 
@@ -84,6 +89,8 @@ Requires `com.svenruppert:functional-reactive` (transitive via parent BOM).
 
 ---
 
-**Compatibility**: Java 26, Vaadin 25.1.x, Jetty 12.1.x (EE11). No change in runtime requirements vs. 03.00.00.
+**Compatibility**: Java 26, Vaadin 25.1.x, Jetty 12.1.x (EE11). No change in runtime requirements vs. the 03.x line.
 
-**Source compatibility**: One breaking change — the `startServer` return type. All other changes are internal or build-only.
+**Source compatibility**: One breaking change — the `startServer` return type (`throws Exception` → `Result<Server, Exception>`). The new 4-arg `startServer(host, port, routes, ClassLoader)` is additive. All remaining changes are internal or build-only.
+
+**Behaviour change**: a misconfigured caller (no frontend bundle on the classpath) now sees a `Result.failure(IllegalStateException)` at `startServer(...)` instead of Vaadin's HTTP 500 on the first request. If your build already runs `vaadin-maven-plugin build-frontend`, nothing changes for you.

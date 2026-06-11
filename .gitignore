@@ -181,3 +181,12 @@ operadriver-mac-64bit/
 phantomjs-mac-64bit
 phantomjs-mac-64bit.version
 /src/main/frontend/generated/
+/src/main/frontend/index.html
+/tsconfig.json
+/types.d.ts
+/vite.config.ts
+/vite.generated.ts
+
+# IDE / agent scratch
+/.antigravitycli/
+/COMMIT_MSG.md

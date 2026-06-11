@@ -32,7 +32,7 @@
 
     <groupId>com.svenruppert.vaadin</groupId>
     <artifactId>nano-vaadin-jetty</artifactId>
-    <version>03.00.01-SNAPSHOT</version>
+    <version>04.00.00</version>
     <packaging>jar</packaging>
 
     <name>Nano Vaadin Jetty</name>
@@ -245,6 +245,9 @@
     <profiles>
         <profile>
             <id>demo</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <vaadin.ui.scope>compile</vaadin.ui.scope>
             </properties>
@@ -274,6 +277,32 @@
                             <excludes>
                                 <exclude>META-INF/VAADIN/**</exclude>
                             </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- The parent's _deploy profile ships central-publishing-maven-plugin with
+             skipPublishing=true (a fail-safe so a bare `mvn -P _deploy deploy` never
+             uploads). Unskip it here; autoPublish stays at false so the upload lands as
+             a "validated" deployment in the Central Portal — switch the Publish button
+             manually after eyeballing the staged artefacts.
+
+             Note: the parent's maven-deploy-plugin <skip>true</skip> is *kept* — Central
+             Portal goes through central-publishing-maven-plugin only, and the parent's
+             distributionManagement still points at the long-dead OSSRH endpoint
+             (s01.oss.sonatype.org, shut down 2025-06-30). -->
+        <profile>
+            <id>_deploy</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <configuration>
+                            <skipPublishing>false</skipPublishing>
+                            <autoPublish>false</autoPublish>
                         </configuration>
                     </plugin>
                 </plugins>
