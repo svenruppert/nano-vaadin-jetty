@@ -1,4 +1,4 @@
-# Nano Vaadin Jetty
+verschiebe die Skripte in ein Verzeichnis scripts# Nano Vaadin Jetty
 
 A small Java 26 / Vaadin Flow launcher on embedded Jetty 12 (EE11). The library
 exposes a tiny API to spin up a Jetty server with a Vaadin servlet attached,
@@ -27,21 +27,38 @@ production frontend bundle.
 
 ## Library API
 
+`startServer(...)` returns `Result<Server, Exception>` (from
+`com.svenruppert:functional-reactive`); the examples below use
+`getOrThrow()` for brevity. See [Handling startup
+failure](#handling-startup-failure) below for the non-throwing form.
+
 ```java
 import com.svenruppert.vaadin.nano.CoreUIServiceJava;
 
 // 1. Plain start — no routes registered, caller wires up routes elsewhere
 //    (e.g. via a META-INF/services VaadinServiceInitListener inside a JAR)
-Server server = CoreUIServiceJava.startServer("127.0.0.1", 8080);
+Server server = CoreUIServiceJava.startServer("127.0.0.1", 8080).getOrThrow();
 
 // 2. Start with explicit routes — registered race-free, before the first request
 Server server = CoreUIServiceJava.startServer("127.0.0.1", 8080,
-    List.of(MyView.class, AdminView.class));
+    List.of(MyView.class, AdminView.class)).getOrThrow();
 
 // 3. Start with scanned routes — classgraph walks the given packages on the
 //    runtime classpath for classes annotated @Route extending Component
 Server server = CoreUIServiceJava.startServer("127.0.0.1", 8080,
-    CoreUIServiceJava.scanForRoutes("com.example.views", "com.example.admin"));
+    CoreUIServiceJava.scanForRoutes("com.example.views", "com.example.admin"))
+    .getOrThrow();
+```
+
+### Handling startup failure
+
+`Result` makes a failed startup (`BindException`, missing config, …) a
+first-class return value instead of a thrown checked exception:
+
+```java
+CoreUIServiceJava.startServer("127.0.0.1", 8080)
+    .peek(srv -> logger().info("listening on {}", srv.getURI()))
+    .peekFailure(err -> logger().error("startup failed", err));
 ```
 
 ### Why an explicit registration step?
@@ -105,11 +122,16 @@ then launch `DemoApplication.main()`.
 
 Open `http://127.0.0.1:8080/` — button + click counter.
 
+The `demo` profile's `maven-jar-plugin` excludes `META-INF/VAADIN/**` from
+the produced jar, so even after `-P demo package` the artefact stays at
+~9 KB. The bundle still lives in `target/classes` for `exec:java`.
+
 ## Releasing to Maven Central
 
 Deploy targets are inherited from the parent
 `com.svenruppert:dependencies`. Releases go to the **Sonatype Central
-Portal** (`central.sonatype.com`) via `central-publishing-maven-plugin`:
+Portal** (`central.sonatype.com`) via `central-publishing-maven-plugin`.
+The bare Maven command is:
 
 ```bash
 ./mvnw -P _deploy,_release_prepare,_release_sign-artifacts deploy
@@ -129,6 +151,31 @@ available to `gpg` on the build host.
 > The bare `mvn deploy` (no profile) targets the legacy OSSRH endpoint
 > at `s01.oss.sonatype.org`, which was shut down on 2025-06-30 — that
 > path no longer works. Always use the `_deploy` profile.
+
+### Release helper scripts
+
+Two wrappers under [`scripts/`](scripts/) cover the two release paths:
+
+| Script | What it does | Uploads? | Use it when |
+|---|---|---|---|
+| [`scripts/publish-to-central.sh`](scripts/publish-to-central.sh) | Pre-flight, runs `clean test`, runs the PIT mutation gate (must hit 100 %), then `mvn -P _deploy,_release_prepare,_release_sign-artifacts deploy` | **Yes** — via central-publishing-maven-plugin | You trust the build, you want a one-shot release, your `settings.xml` is set up |
+| [`scripts/build-central-bundle.sh`](scripts/build-central-bundle.sh) | Pre-flight, builds + signs the artefacts, stages them in the Maven-Central layout, generates `.md5` / `.sha1` / `.sha256` / `.sha512`, zips it to `target/central-bundle-<version>.zip` | **No** — local ZIP only | You want to inspect the bundle (`unzip -l …`), verify signatures manually, or upload by hand at <https://central.sonatype.com/publishing/deployments> |
+
+Both share the same pre-flight (`gpg` key present, non-`-SNAPSHOT`
+version) and read the project coordinates straight from `pom.xml` via
+`xmllint` to avoid Maven JVM cold-start latency. Run either with
+`--help` for the full flag list.
+
+Common flags:
+
+- `--allow-snapshot` lets either script run against a `-SNAPSHOT`
+  version (intended for dry runs / inspection only — Central rejects
+  uploaded snapshots).
+- `--dry-run` (publish only) skips the actual `deploy` step.
+- `--skip-tests` / `--skip-mutation` (publish only) bypass the
+  respective quality gate.
+- `--keep-workdir` (bundle only) leaves the staging directory in place
+  for inspection.
 
 ## Conventions
 
