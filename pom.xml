@@ -78,7 +78,7 @@
     </issueManagement>
 
     <properties>
-        <jetty.version>12.1.8</jetty.version>
+        <jetty.version>12.1.10</jetty.version>
         <vaadin.version>25.1.1</vaadin.version>
         <jackson.version>3.1.0</jackson.version>
         <vaadin-browserless-test.version>1.0.0</vaadin-browserless-test.version>
